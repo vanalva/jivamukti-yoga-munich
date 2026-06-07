@@ -1,4 +1,4 @@
-/* ════════════════════════════════════════════════════════════
+﻿/* ════════════════════════════════════════════════════════════
    FRAMEWORK — Jivamukti Yoga München
    Ported from the Düsseldorf Flowriter harvest. Consolidated from:
    normalize.css, webflow.css (filtered), jivamukti-dusseldorf.webflow.css,
@@ -7247,7 +7247,7 @@ body.method-page {
 
 /* Nav text: uppercase, no wrapping */
 .nav_links_text {
-  font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+  font-size: clamp(0.65rem, 0.9cqi, 0.8rem);
   letter-spacing: var(--_typography---letter-spacing--wider);
   text-transform: uppercase;
   white-space: nowrap;
@@ -7255,7 +7255,7 @@ body.method-page {
 
 /* Dropdown text matches nav text style */
 .nav_dropdown_text {
-  font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+  font-size: clamp(0.65rem, 0.9cqi, 0.8rem);
   letter-spacing: var(--_typography---letter-spacing--wider);
   text-transform: uppercase;
   white-space: nowrap;
@@ -7999,7 +7999,7 @@ body.method-page {
 
 .marquee_text {
   display: inline-block;
-  font-size: clamp(3rem, 8vw, 8rem);
+  font-size: clamp(3rem, 8cqi, 8rem);
   font-weight: var(--_typography---font--primary-medium);
   text-transform: uppercase;
   letter-spacing: var(--_typography---letter-spacing--wide);

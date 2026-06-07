@@ -817,3 +817,62 @@
     font-size: 1.25rem;
     opacity: 0.7;
 }
+
+/* ==========================================================================
+   KLASSEN-LEVELS — Basic / Medium / Open prominence block (stunden-stile)
+   ========================================================================== */
+.levels_grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: var(--site--gutter);
+    row-gap: var(--site--gutter);
+}
+.level_card {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: calc((100% - 2 * var(--site--gutter)) / 3);
+    min-width: 280px;
+    border-top-width: var(--border-width--main);
+    border-right-width: var(--border-width--main);
+    border-bottom-width: var(--border-width--main);
+    border-left-width: var(--border-width--main);
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: var(--_theme---button-secondary--border);
+    border-right-color: var(--_theme---button-secondary--border);
+    border-bottom-color: var(--_theme---button-secondary--border);
+    border-left-color: var(--_theme---button-secondary--border);
+    border-top-left-radius: var(--radius--main);
+    border-top-right-radius: var(--radius--main);
+    border-bottom-right-radius: var(--radius--main);
+    border-bottom-left-radius: var(--radius--main);
+    padding-top: var(--_spacing---space--4-24px);
+    padding-right: var(--_spacing---space--4-24px);
+    padding-bottom: var(--_spacing---space--4-24px);
+    padding-left: var(--_spacing---space--4-24px);
+}
+.level_card_title {
+    margin-top: 0;
+    margin-bottom: var(--_spacing---space--2-12px);
+}
+@media (max-width: 991px) {
+    .level_card {
+        flex-basis: calc((100% - var(--site--gutter)) / 2);
+    }
+}
+@media (max-width: 767px) {
+    .level_card {
+        flex-basis: 100%;
+    }
+}
+
+/* Event card meta line (date · time · price) — events overview */
+.event_meta {
+    margin-top: 0;
+    margin-bottom: var(--_spacing---space--2-12px);
+    opacity: 0.75;
+    font-size: 0.875rem;
+}
