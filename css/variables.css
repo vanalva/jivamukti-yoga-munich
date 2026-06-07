@@ -96,7 +96,7 @@
   --_theme---nav--background: var(--_theme---background-2);
   --nav--max-width-inner: var(--max-width--main);
   --nav--height-total: calc(var(--nav--height)  + var(--nav--spacing-outer-vertical));
-  --nav--spacing-outer-vertical: var(--site--margin);
+  --nav--spacing-outer-vertical: 0.75rem;
   --swatch--dark-900: #191a1c;
   --nav--height: 4rem;
   --nav--hamburger-thickness: var(--border-width--main);
