@@ -1,0 +1,52 @@
+<!-- Component: Classes Carousel — Jivamukti Yoga München
+     Usage: Homepage "Featured Classes" section. Swiper-driven fade carousel.
+     Dependencies: Swiper 8 (CDN loaded via site). Needs carousel-classes.js init. -->
+<section class="carousel_classes u-padding-block-main">
+    <div class="u-container">
+
+        <div class="carousel_classes_header u-flex-horizontal-wrap u-justify-content-between u-align-items-end u-gap-inline-4">
+            <div class="u-max-width-50ch">
+                <p class="u-eyebrow-text u-text-style-small u-letter-spacing-wider u-text-transform-uppercase">Klassen</p>
+                <h2 class="c-heading" data-style="h2">Finde deinen Flow</h2>
+            </div>
+            <div class="carousel_classes_nav u-flex-horizontal-nowrap u-gap-inline-2" role="group" aria-label="Carousel-Steuerung">
+                <button type="button" class="carousel_classes_prev" aria-label="Vorherige Klasse" data-trigger="hover focus">
+                    <svg class="u-svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <path class="u-path" d="M15 5 L8 12 L15 19" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke"/>
+                    </svg>
+                </button>
+                <button type="button" class="carousel_classes_next" aria-label="Nächste Klasse" data-trigger="hover focus">
+                    <svg class="u-svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <path class="u-path" d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="carousel_classes_track swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide carousel_classes_slide">
+                    <div class="image-wrap image-wrap--landscape image-wrap--rounded">
+                        <img src="assets/class-vinyasa.webp" alt="Vinyasa-Klasse" class="image-wrap__img image-wrap__img--cover">
+                    </div>
+                    <h3 class="c-heading" data-style="h3">Vinyasa Flow</h3>
+                    <p class="u-text-style-main">Dynamischer Flow im Atemrhythmus — Kraft und Präsenz.</p>
+                </div>
+                <div class="swiper-slide carousel_classes_slide">
+                    <div class="image-wrap image-wrap--landscape image-wrap--rounded">
+                        <img src="assets/class-yin.webp" alt="Yin-Yoga-Klasse" class="image-wrap__img image-wrap__img--cover">
+                    </div>
+                    <h3 class="c-heading" data-style="h3">Yin Yoga</h3>
+                    <p class="u-text-style-main">Lange gehaltene Asanas, tiefe Entspannung, sanftes Loslassen.</p>
+                </div>
+                <div class="swiper-slide carousel_classes_slide">
+                    <div class="image-wrap image-wrap--landscape image-wrap--rounded">
+                        <img src="assets/class-kundalini.webp" alt="Kundalini-Klasse" class="image-wrap__img image-wrap__img--cover">
+                    </div>
+                    <h3 class="c-heading" data-style="h3">Kundalini</h3>
+                    <p class="u-text-style-main">Energiefluss durch Kriyas, Mantras und Meditation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

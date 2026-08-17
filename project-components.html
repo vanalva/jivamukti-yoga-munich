@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jivamukti Yoga München — Project Components</title>
+    <meta name="description" content="Preview of every project-specific component built for the Munich site.">
+    <link rel="stylesheet" href="css/variables.css?v=9d88d0fc">
+    <link rel="stylesheet" href="css/framework.css?v=3096a668">
+    <link rel="stylesheet" href="css/project.css?v=5a56ba58">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/png">
+    <style>
+        /* sg-* = preview chrome only. Never on a rendered component. */
+        .sg-preview-body { background-color: var(--_theme---background); color: var(--_theme---text); }
+        .sg-preview-section {
+            padding-top: 3rem; padding-bottom: 3rem;
+            border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: var(--_theme---border);
+        }
+        .sg-preview-label {
+            font-family: ui-monospace, Consolas, monospace;
+            font-size: 0.7rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            opacity: 0.55;
+            padding-top: 0; padding-right: 1.5rem; padding-bottom: 0.75rem; padding-left: 1.5rem;
+        }
+        .sg-preview-hint {
+            font-size: 0.8rem; opacity: 0.7;
+            padding-top: 0; padding-right: 1.5rem; padding-bottom: 0.75rem; padding-left: 1.5rem;
+        }
+    </style>
+</head>
+<body class="u-theme-light sg-preview-body">
+<div class="page_wrap">
+
+    <!-- ════════════════ NAV ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Navbar · global</div>
+        <div class="sg-preview-hint">components/navbar/navbar.html — desktop dropdowns for two studios, mobile trigger, brand-theme announcement banner</div>
+
+        <div data-wf--nav--nav-position="overlap" class="nav_component">
+            <a href="#main" class="nav_skip_wrap w-inline-block"><div class="nav_skip_text u-text-style-small">Zum Hauptinhalt springen</div></a>
+            <div aria-label="Ankündigung" role="region" class="nav_banner_wrap u-theme-brand">
+                <div class="nav_banner_contain">
+                    <a href="preise.html" class="nav_banner_link w-inline-block">
+                        <div class="nav_banner_text u-line-clamp-1">Probemonat — Übe einen Monat so oft du möchtest für nur 58€</div>
+                    </a>
+                </div>
+            </div>
+            <header class="nav_desktop_wrap">
+                <div class="nav_desktop_contain">
+                    <div class="nav_desktop_layout">
+                        <a aria-label="Startseite" href="index.html" class="nav_desktop_logo w-inline-block">
+                            <img src="assets/logos/munich-vertical--density.svg" alt="Jivamukti Yoga München" class="nav_logo_image">
+                        </a>
+                        <nav aria-label="Hauptnavigation" class="nav_links_component">
+                            <ul role="list" class="nav_links_wrap w-list-unstyled">
+                                <li class="nav_links_item"><a href="index.html" class="nav_links_link w-inline-block"><div class="nav_links_text">Startseite</div></a></li>
+                                <li class="nav_links_item"><a href="stundenplan-lehel.html" class="nav_links_link w-inline-block"><div class="nav_links_text">Stundenplan Lehel</div></a></li>
+                                <li class="nav_links_item"><a href="stundenplan-glockenbach.html" class="nav_links_link w-inline-block"><div class="nav_links_text">Stundenplan Glockenbach</div></a></li>
+                                <li class="nav_links_item"><a href="unsere-studios.html" class="nav_links_link w-inline-block"><div class="nav_links_text">Studios</div></a></li>
+                                <li class="nav_links_item"><a href="das-team.html" class="nav_links_link w-inline-block"><div class="nav_links_text">Team</div></a></li>
+                                <li class="nav_links_item"><a href="preise.html" class="nav_links_link w-inline-block"><div class="nav_links_text">Preise</div></a></li>
+                            </ul>
+                        </nav>
+                        <div data-wf--button-main--variant="primary" class="button_main_wrap nav_cta_wrap" data-trigger="hover focus">
+                            <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block" aria-label="Klassen buchen"></a></div>
+                            <div class="button_main_element"><div class="button_main_text u-text-style-main">Klassen buchen</div></div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+    </div>
+
+    <!-- ════════════════ HERO PRIMARY ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Hero Primary · homepage</div>
+        <div class="sg-preview-hint">components/hero/hero-primary.html — full-bleed image, dark overlay, center-aligned title + dual CTA</div>
+        <section class="hero_primary u-theme-dark">
+            <div class="hero_primary_background">
+                <img src="assets/studio-hero.jpg" alt="Yoga-Klasse bei Jivamukti Yoga München" class="hero_primary_image u-object-fit-cover">
+                <div class="hero_primary_overlay"></div>
+            </div>
+            <div class="u-container hero_primary_content">
+                <div class="u-content-wrapper u-alignment-center u-max-width-60ch">
+                    <p class="u-eyebrow-text u-text-style-small u-letter-spacing-wider u-text-transform-uppercase">Willkommen bei</p>
+                    <h1 class="c-heading hero_primary_title" data-style="display">Jivamukti Yoga München</h1>
+                    <p class="u-text-style-large hero_primary_tagline">Lokah samastah sukhino bhavantu. Mögen alle Wesen überall glücklich und frei sein.</p>
+                    <div class="u-button-group u-margin-top-5">
+                        <div data-wf--button-main--variant="primary" class="button_main_wrap" data-trigger="hover focus">
+                            <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block" aria-label="Klassen buchen"></a></div>
+                            <div class="button_main_element"><div class="button_main_text u-text-style-main">Klassen buchen</div></div>
+                        </div>
+                        <div data-wf--button-main--variant="secondary" class="button_main_wrap" data-trigger="hover focus">
+                            <div class="clickable_wrap u-cover-absolute"><a href="stunden-stile.html" class="clickable_link w-inline-block" aria-label="Klassen-Stile entdecken"></a></div>
+                            <div class="button_main_element"><div class="button_main_text u-text-style-main">Klassen-Stile entdecken</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ════════════════ HERO SIMPLE ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Hero Simple · subpages</div>
+        <div class="sg-preview-hint">components/hero/hero-simple.html — breadcrumb + eyebrow + title + lede</div>
+        <section class="hero_simple u-padding-top-large u-padding-bottom-main">
+            <div class="u-container">
+                <div class="u-content-wrapper u-alignment-start u-max-width-70ch">
+                    <nav aria-label="Breadcrumb" class="hero_simple_breadcrumb u-text-style-small">
+                        <a href="index.html" class="hero_simple_breadcrumb_link">Startseite</a>
+                        <span class="hero_simple_breadcrumb_sep" aria-hidden="true">·</span>
+                        <span class="hero_simple_breadcrumb_current">Das Team</span>
+                    </nav>
+                    <p class="u-eyebrow-text u-text-style-small u-letter-spacing-wider u-text-transform-uppercase hero_simple_eyebrow">Unsere Lehrer:innen</p>
+                    <h1 class="c-heading hero_simple_title" data-style="h1">Das Team</h1>
+                    <p class="u-text-style-large hero_simple_lede">Zwölf zertifizierte Lehrer:innen, ausgebildet in der Jivamukti-Methode — Vinyasa, Philosophie, Bhakti und trauma-sensible Praxis.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ════════════════ QUOTE BLOCK ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Quote Block · philosophy</div>
+        <div class="sg-preview-hint">components/quote/quote-block.html</div>
+        <section class="quote_block u-padding-block-large">
+            <div class="u-container u-container-small">
+                <blockquote class="quote_block_contain u-alignment-center">
+                    <p class="quote_block_text c-heading" data-style="h2">"Lokah samastah sukhino bhavantu."</p>
+                    <p class="quote_block_translation u-text-style-large">Mögen alle Wesen überall glücklich und frei sein — mögen die Gedanken, Worte und Handlungen meines eigenen Lebens in irgendeiner Weise zum Glück und zur Freiheit aller beitragen.</p>
+                    <cite class="quote_block_source u-text-style-small u-letter-spacing-wider u-text-transform-uppercase">Jivamukti-Mantra</cite>
+                </blockquote>
+            </div>
+        </section>
+    </div>
+
+    <!-- ════════════════ TEACHER CARDS (grid) ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Teacher Cards · u-grid-autofit</div>
+        <div class="sg-preview-hint">components/cards/card-teacher.html — repeat inside autofit grid for team page</div>
+        <div class="u-container">
+            <div class="u-grid-autofit u-gap-inline-4 u-gap-row-5">
+                <article class="teacher_card u-position-relative" data-trigger="hover focus">
+                    <div class="teacher_card_media image-wrap image-wrap--portrait-tall image-wrap--rounded">
+                        <img src="assets/logos/munich-full-left--silk.svg" alt="Jessina" class="image-wrap__img image-wrap__img--cover image-wrap__img--top">
+                    </div>
+                    <div class="teacher_card_body">
+                        <h3 class="c-heading teacher_card_name" data-style="h4">Jessina</h3>
+                        <p class="teacher_card_role u-text-style-small u-letter-spacing-wider u-text-transform-uppercase">Senior Teacher · Jivamukti 300HR</p>
+                        <p class="teacher_card_bio u-text-style-main u-line-clamp-3">Jessina unterrichtet seit 12 Jahren und verbindet Vinyasa, Philosophie und Bhakti.</p>
+                    </div>
+                    <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block"><span class="clickable_text u-sr-only">Mehr über Jessina</span></a></div>
+                </article>
+                <article class="teacher_card u-position-relative" data-trigger="hover focus">
+                    <div class="teacher_card_media image-wrap image-wrap--portrait-tall image-wrap--rounded">
+                        <img src="assets/logos/munich-full-left--silk.svg" alt="Anne Lotte" class="image-wrap__img image-wrap__img--cover image-wrap__img--top">
+                    </div>
+                    <div class="teacher_card_body">
+                        <h3 class="c-heading teacher_card_name" data-style="h4">Anne Lotte</h3>
+                        <p class="teacher_card_role u-text-style-small u-letter-spacing-wider u-text-transform-uppercase">Teacher · Jivamukti 300HR</p>
+                        <p class="teacher_card_bio u-text-style-main u-line-clamp-3">Anne Lotte verbindet Yin und Vinyasa zu einer sanften, tiefen Praxis.</p>
+                    </div>
+                    <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block"><span class="clickable_text u-sr-only">Mehr über Anne Lotte</span></a></div>
+                </article>
+                <article class="teacher_card u-position-relative" data-trigger="hover focus">
+                    <div class="teacher_card_media image-wrap image-wrap--portrait-tall image-wrap--rounded">
+                        <img src="assets/logos/munich-full-left--silk.svg" alt="Manuela" class="image-wrap__img image-wrap__img--cover image-wrap__img--top">
+                    </div>
+                    <div class="teacher_card_body">
+                        <h3 class="c-heading teacher_card_name" data-style="h4">Manuela</h3>
+                        <p class="teacher_card_role u-text-style-small u-letter-spacing-wider u-text-transform-uppercase">Co-Founder · 500HR</p>
+                        <p class="teacher_card_bio u-text-style-main u-line-clamp-3">Manuela hat Jivamukti München 2012 mitbegründet und unterrichtet seit 20 Jahren.</p>
+                    </div>
+                    <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block"><span class="clickable_text u-sr-only">Mehr über Manuela</span></a></div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════ CLASS STYLE CARDS (grid) ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Class Style Cards · stunden-stile page</div>
+        <div class="sg-preview-hint">components/cards/card-class-style.html</div>
+        <div class="u-container">
+            <div class="u-grid-autofit u-gap-inline-4 u-gap-row-4">
+                <article class="class-style_card u-position-relative">
+                    <div class="class-style_card_media image-wrap image-wrap--landscape image-wrap--rounded">
+                        <img src="assets/studio-hero.jpg" alt="Vinyasa Flow" class="image-wrap__img image-wrap__img--cover">
+                    </div>
+                    <div class="class-style_card_body u-padding-4">
+                        <h3 class="c-heading class-style_card_title" data-style="h3">Vinyasa</h3>
+                        <p class="class-style_card_lede u-text-style-main">Dynamischer Flow im Atemrhythmus. Kraft, Ausdauer und Fokus.</p>
+                        <ul role="list" class="class-style_card_meta u-flex-horizontal-wrap u-gap-inline-3 u-text-style-small u-margin-top-3 w-list-unstyled">
+                            <li>Level 1–3</li><li>75 Min.</li><li>Beide Studios</li>
+                        </ul>
+                    </div>
+                    <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block"><span class="clickable_text u-sr-only">Mehr über Vinyasa</span></a></div>
+                </article>
+                <article class="class-style_card u-position-relative">
+                    <div class="class-style_card_media image-wrap image-wrap--landscape image-wrap--rounded">
+                        <img src="assets/studio-hero.jpg" alt="Yin Yoga" class="image-wrap__img image-wrap__img--cover">
+                    </div>
+                    <div class="class-style_card_body u-padding-4">
+                        <h3 class="c-heading class-style_card_title" data-style="h3">Yin</h3>
+                        <p class="class-style_card_lede u-text-style-main">Lange gehaltene Asanas, tiefe Entspannung, sanftes Loslassen.</p>
+                        <ul role="list" class="class-style_card_meta u-flex-horizontal-wrap u-gap-inline-3 u-text-style-small u-margin-top-3 w-list-unstyled">
+                            <li>Level 1–2</li><li>75 Min.</li><li>Glockenbach</li>
+                        </ul>
+                    </div>
+                    <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block"><span class="clickable_text u-sr-only">Mehr über Yin</span></a></div>
+                </article>
+                <article class="class-style_card u-position-relative">
+                    <div class="class-style_card_media image-wrap image-wrap--landscape image-wrap--rounded">
+                        <img src="assets/studio-hero.jpg" alt="Kundalini" class="image-wrap__img image-wrap__img--cover">
+                    </div>
+                    <div class="class-style_card_body u-padding-4">
+                        <h3 class="c-heading class-style_card_title" data-style="h3">Kundalini</h3>
+                        <p class="class-style_card_lede u-text-style-main">Energiefluss durch Kriyas, Mantras und Meditation.</p>
+                        <ul role="list" class="class-style_card_meta u-flex-horizontal-wrap u-gap-inline-3 u-text-style-small u-margin-top-3 w-list-unstyled">
+                            <li>Level 1–2</li><li>90 Min.</li><li>Lehel</li>
+                        </ul>
+                    </div>
+                    <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block"><span class="clickable_text u-sr-only">Mehr über Kundalini</span></a></div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════ PRICE CARDS ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Price Cards · preise page</div>
+        <div class="sg-preview-hint">components/cards/card-price.html — with combo class `is-featured` on recommended tier</div>
+        <div class="u-container">
+            <div class="u-grid-autofit u-gap-inline-4 u-gap-row-4">
+                <article class="price_card">
+                    <header class="price_card_header">
+                        <h3 class="c-heading price_card_name" data-style="h3">Drop-in</h3>
+                        <p class="price_card_subtitle u-text-style-small">Einzelstunde</p>
+                    </header>
+                    <div class="price_card_pricing"><span class="price_card_amount">€22</span><span class="price_card_period u-text-style-small">/ Klasse</span></div>
+                    <p class="price_card_note u-text-style-small">€18 ermäßigt</p>
+                    <ul role="list" class="price_card_features w-list-unstyled">
+                        <li class="price_card_feature u-text-style-main">Einzelne Klasse</li>
+                        <li class="price_card_feature u-text-style-main">Beide Studios</li>
+                    </ul>
+                    <div class="price_card_cta">
+                        <div data-wf--button-main--variant="secondary" class="button_main_wrap" data-trigger="hover focus">
+                            <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block" aria-label="Drop-in kaufen"></a></div>
+                            <div class="button_main_element"><div class="button_main_text u-text-style-main">Buchen</div></div>
+                        </div>
+                    </div>
+                </article>
+                <article class="price_card is-featured">
+                    <header class="price_card_header">
+                        <p class="price_card_eyebrow u-text-style-small u-letter-spacing-wider u-text-transform-uppercase">Empfehlung</p>
+                        <h3 class="c-heading price_card_name" data-style="h3">Monatskarte</h3>
+                        <p class="price_card_subtitle u-text-style-small">Gültig in beiden Studios</p>
+                    </header>
+                    <div class="price_card_pricing"><span class="price_card_amount">€99</span><span class="price_card_period u-text-style-small">/ Monat</span></div>
+                    <p class="price_card_note u-text-style-small">€85 ermäßigt · €75 unter 23</p>
+                    <ul role="list" class="price_card_features w-list-unstyled">
+                        <li class="price_card_feature u-text-style-main">Unbegrenzte Klassen</li>
+                        <li class="price_card_feature u-text-style-main">Beide Studios (Lehel + Glockenbach)</li>
+                        <li class="price_card_feature u-text-style-main">Alle Klassen-Stile</li>
+                        <li class="price_card_feature u-text-style-main">Monatlich kündbar</li>
+                    </ul>
+                    <div class="price_card_cta">
+                        <div data-wf--button-main--variant="primary" class="button_main_wrap" data-trigger="hover focus">
+                            <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block" aria-label="Monatskarte kaufen"></a></div>
+                            <div class="button_main_element"><div class="button_main_text u-text-style-main">Hier kaufen</div></div>
+                        </div>
+                    </div>
+                </article>
+                <article class="price_card">
+                    <header class="price_card_header">
+                        <h3 class="c-heading price_card_name" data-style="h3">10er Karte</h3>
+                        <p class="price_card_subtitle u-text-style-small">6 Monate gültig</p>
+                    </header>
+                    <div class="price_card_pricing"><span class="price_card_amount">€180</span><span class="price_card_period u-text-style-small">/ 10 Klassen</span></div>
+                    <p class="price_card_note u-text-style-small">€18 pro Klasse</p>
+                    <ul role="list" class="price_card_features w-list-unstyled">
+                        <li class="price_card_feature u-text-style-main">10 Klassen</li>
+                        <li class="price_card_feature u-text-style-main">Beide Studios</li>
+                        <li class="price_card_feature u-text-style-main">6 Monate gültig</li>
+                    </ul>
+                    <div class="price_card_cta">
+                        <div data-wf--button-main--variant="secondary" class="button_main_wrap" data-trigger="hover focus">
+                            <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block" aria-label="10er Karte kaufen"></a></div>
+                            <div class="button_main_element"><div class="button_main_text u-text-style-main">Hier kaufen</div></div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════ STUDIO CARDS ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Studio Cards · unsere-studios page</div>
+        <div class="sg-preview-hint">components/studios/studio-card.html — one per studio</div>
+        <div class="u-container">
+            <div class="u-grid-custom u-gap-inline-5 u-gap-row-5">
+                <article class="studio_card u-column-6">
+                    <div class="studio_card_media image-wrap image-wrap--landscape-photo image-wrap--rounded">
+                        <img src="assets/studio-hero.jpg" alt="Studio Lehel" class="image-wrap__img image-wrap__img--cover">
+                    </div>
+                    <div class="studio_card_body u-padding-5">
+                        <p class="studio_card_eyebrow u-text-style-small u-letter-spacing-wider u-text-transform-uppercase">Yogaschule</p>
+                        <h3 class="c-heading studio_card_name" data-style="h3">Lehel</h3>
+                        <address class="studio_card_address u-text-style-main">Robert-Koch-Str. 13<br>80538 München</address>
+                        <p class="studio_card_desc u-text-style-main">Ruhig gelegen, nahe Isar und Friedensengel. Ein Ort für Stille, Kraft und Verbindung.</p>
+                    </div>
+                </article>
+                <article class="studio_card u-column-6">
+                    <div class="studio_card_media image-wrap image-wrap--landscape-photo image-wrap--rounded">
+                        <img src="assets/studio-hero.jpg" alt="Studio Glockenbach" class="image-wrap__img image-wrap__img--cover">
+                    </div>
+                    <div class="studio_card_body u-padding-5">
+                        <p class="studio_card_eyebrow u-text-style-small u-letter-spacing-wider u-text-transform-uppercase">Yogaschule</p>
+                        <h3 class="c-heading studio_card_name" data-style="h3">Glockenbach</h3>
+                        <address class="studio_card_address u-text-style-main">Müllerstr. 33 (Hinterhof)<br>80469 München</address>
+                        <p class="studio_card_desc u-text-style-main">Zentral zwischen Sendlingertor und Fraunhoferstr. — mitten im Glockenbachviertel.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════ SCHEDULE ROWS ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Schedule Rows · stundenplan page</div>
+        <div class="sg-preview-hint">components/schedule/schedule-row.html — repeat under a day header</div>
+        <div class="u-container u-container-small">
+            <h2 class="c-heading u-margin-bottom-4" data-style="h3">Montag · Lehel</h2>
+            <div class="u-flex-vertical-nowrap">
+                <article class="schedule_row u-flex-horizontal-wrap u-align-items-center u-gap-inline-4 u-padding-block-3">
+                    <div class="schedule_row_time">
+                        <time datetime="07:30" class="schedule_row_start c-heading" data-style="h5">07:30</time>
+                        <span class="schedule_row_duration u-text-style-small">75 Min.</span>
+                    </div>
+                    <div class="schedule_row_class u-flex-grow">
+                        <h3 class="c-heading schedule_row_title" data-style="h5">Morning Vinyasa</h3>
+                        <p class="schedule_row_meta u-text-style-small"><span>Vinyasa</span><span aria-hidden="true">·</span><span>mit Jessina</span><span aria-hidden="true">·</span><span>Level 1–2</span></p>
+                    </div>
+                    <div class="schedule_row_cta">
+                        <div data-wf--button-main--variant="secondary" class="button_main_wrap" data-trigger="hover focus">
+                            <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block" aria-label="Morning Vinyasa buchen"></a></div>
+                            <div class="button_main_element"><div class="button_main_text u-text-style-small">Buchen</div></div>
+                        </div>
+                    </div>
+                </article>
+                <article class="schedule_row u-flex-horizontal-wrap u-align-items-center u-gap-inline-4 u-padding-block-3">
+                    <div class="schedule_row_time">
+                        <time datetime="10:00" class="schedule_row_start c-heading" data-style="h5">10:00</time>
+                        <span class="schedule_row_duration u-text-style-small">90 Min.</span>
+                    </div>
+                    <div class="schedule_row_class u-flex-grow">
+                        <h3 class="c-heading schedule_row_title" data-style="h5">Open Class</h3>
+                        <p class="schedule_row_meta u-text-style-small"><span>Vinyasa</span><span aria-hidden="true">·</span><span>mit Manuela</span><span aria-hidden="true">·</span><span>Level 2–3</span></p>
+                    </div>
+                    <div class="schedule_row_cta">
+                        <div data-wf--button-main--variant="secondary" class="button_main_wrap" data-trigger="hover focus">
+                            <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block" aria-label="Open Class buchen"></a></div>
+                            <div class="button_main_element"><div class="button_main_text u-text-style-small">Buchen</div></div>
+                        </div>
+                    </div>
+                </article>
+                <article class="schedule_row u-flex-horizontal-wrap u-align-items-center u-gap-inline-4 u-padding-block-3">
+                    <div class="schedule_row_time">
+                        <time datetime="18:30" class="schedule_row_start c-heading" data-style="h5">18:30</time>
+                        <span class="schedule_row_duration u-text-style-small">75 Min.</span>
+                    </div>
+                    <div class="schedule_row_class u-flex-grow">
+                        <h3 class="c-heading schedule_row_title" data-style="h5">Evening Yin</h3>
+                        <p class="schedule_row_meta u-text-style-small"><span>Yin</span><span aria-hidden="true">·</span><span>mit Anne Lotte</span><span aria-hidden="true">·</span><span>Alle Levels</span></p>
+                    </div>
+                    <div class="schedule_row_cta">
+                        <div data-wf--button-main--variant="secondary" class="button_main_wrap" data-trigger="hover focus">
+                            <div class="clickable_wrap u-cover-absolute"><a href="#" class="clickable_link w-inline-block" aria-label="Evening Yin buchen"></a></div>
+                            <div class="button_main_element"><div class="button_main_text u-text-style-small">Buchen</div></div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════ ACCORDION ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Accordion · FAQ / Method / Prices</div>
+        <div class="sg-preview-hint">components/accordion/accordion-item.html — native &lt;details&gt;, no JS</div>
+        <div class="u-container u-container-small">
+            <details class="accordion_item" open>
+                <summary class="accordion_item_trigger">
+                    <h3 class="c-heading accordion_item_title" data-style="h4">Was ist Jivamukti Yoga?</h3>
+                    <span class="accordion_item_icon" aria-hidden="true">
+                        <svg class="u-svg" viewBox="0 0 16 16"><path class="u-path" d="M4 6 L8 10 L12 6" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke"/></svg>
+                    </span>
+                </summary>
+                <div class="accordion_item_body u-padding-top-3 u-padding-bottom-4">
+                    <p class="u-text-style-main u-max-width-60ch">Jivamukti Yoga wurde 1984 von Sharon Gannon und David Life in New York gegründet. Die Methode verbindet dynamisches Asana, Pranayama, Bhakti, Meditation und das Studium der yogischen Schriften.</p>
+                </div>
+            </details>
+            <details class="accordion_item">
+                <summary class="accordion_item_trigger">
+                    <h3 class="c-heading accordion_item_title" data-style="h4">Brauche ich Vorkenntnisse?</h3>
+                    <span class="accordion_item_icon" aria-hidden="true">
+                        <svg class="u-svg" viewBox="0 0 16 16"><path class="u-path" d="M4 6 L8 10 L12 6" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke"/></svg>
+                    </span>
+                </summary>
+                <div class="accordion_item_body u-padding-top-3 u-padding-bottom-4">
+                    <p class="u-text-style-main u-max-width-60ch">Nein. Beginner:innen sind in Open-Klassen willkommen — unsere Lehrer:innen bieten Variationen für alle Levels an.</p>
+                </div>
+            </details>
+            <details class="accordion_item">
+                <summary class="accordion_item_trigger">
+                    <h3 class="c-heading accordion_item_title" data-style="h4">Kann ich beide Studios besuchen?</h3>
+                    <span class="accordion_item_icon" aria-hidden="true">
+                        <svg class="u-svg" viewBox="0 0 16 16"><path class="u-path" d="M4 6 L8 10 L12 6" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke"/></svg>
+                    </span>
+                </summary>
+                <div class="accordion_item_body u-padding-top-3 u-padding-bottom-4">
+                    <p class="u-text-style-main u-max-width-60ch">Ja — alle Karten und Mitgliedschaften sind in beiden Studios (Lehel und Glockenbach) gültig.</p>
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <!-- ════════════════ CLASSES CAROUSEL ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Classes Carousel · Swiper</div>
+        <div class="sg-preview-hint">components/carousel/carousel-classes.html + .js — fade carousel with prev/next + autoplay</div>
+        <section class="carousel_classes u-padding-block-main">
+            <div class="u-container">
+                <div class="carousel_classes_header u-flex-horizontal-wrap u-justify-content-between u-align-items-end u-gap-inline-4">
+                    <div class="u-max-width-50ch">
+                        <p class="u-eyebrow-text u-text-style-small u-letter-spacing-wider u-text-transform-uppercase">Klassen</p>
+                        <h2 class="c-heading" data-style="h2">Finde deinen Flow</h2>
+                    </div>
+                    <div class="carousel_classes_nav u-flex-horizontal-nowrap u-gap-inline-2" role="group" aria-label="Carousel-Steuerung">
+                        <button type="button" class="carousel_classes_prev" aria-label="Vorherige Klasse" data-trigger="hover focus">
+                            <svg class="u-svg" viewBox="0 0 24 24" aria-hidden="true"><path class="u-path" d="M15 5 L8 12 L15 19" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke"/></svg>
+                        </button>
+                        <button type="button" class="carousel_classes_next" aria-label="Nächste Klasse" data-trigger="hover focus">
+                            <svg class="u-svg" viewBox="0 0 24 24" aria-hidden="true"><path class="u-path" d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="carousel_classes_track swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide carousel_classes_slide">
+                            <div class="image-wrap image-wrap--landscape image-wrap--rounded"><img src="assets/studio-hero.jpg" alt="Vinyasa-Klasse" class="image-wrap__img image-wrap__img--cover"></div>
+                            <h3 class="c-heading" data-style="h3">Vinyasa Flow</h3>
+                            <p class="u-text-style-main">Dynamischer Flow im Atemrhythmus — Kraft und Präsenz.</p>
+                        </div>
+                        <div class="swiper-slide carousel_classes_slide">
+                            <div class="image-wrap image-wrap--landscape image-wrap--rounded"><img src="assets/studio-hero.jpg" alt="Yin-Yoga-Klasse" class="image-wrap__img image-wrap__img--cover"></div>
+                            <h3 class="c-heading" data-style="h3">Yin Yoga</h3>
+                            <p class="u-text-style-main">Lange gehaltene Asanas, tiefe Entspannung, sanftes Loslassen.</p>
+                        </div>
+                        <div class="swiper-slide carousel_classes_slide">
+                            <div class="image-wrap image-wrap--landscape image-wrap--rounded"><img src="assets/studio-hero.jpg" alt="Kundalini-Klasse" class="image-wrap__img image-wrap__img--cover"></div>
+                            <h3 class="c-heading" data-style="h3">Kundalini</h3>
+                            <p class="u-text-style-main">Energiefluss durch Kriyas, Mantras und Meditation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ════════════════ MARQUEE ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Text Marquee · between sections</div>
+        <div class="sg-preview-hint">components/marquee/marquee-text.html + .js — infinite scroll, hover reverses</div>
+        <section class="marquee_text u-theme-brand u-padding-block-4 u-overflow-hidden">
+            <div class="marquee_text_track swiper" data-marquee-speed="40" data-marquee-direction="left" data-marquee-hover="reverse">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide marquee_text_slide"><span class="marquee_text_item c-heading" data-style="h2">Asana</span></div>
+                    <div class="swiper-slide marquee_text_slide"><span class="marquee_text_bullet" aria-hidden="true">✦</span></div>
+                    <div class="swiper-slide marquee_text_slide"><span class="marquee_text_item c-heading" data-style="h2">Bhakti</span></div>
+                    <div class="swiper-slide marquee_text_slide"><span class="marquee_text_bullet" aria-hidden="true">✦</span></div>
+                    <div class="swiper-slide marquee_text_slide"><span class="marquee_text_item c-heading" data-style="h2">Pranayama</span></div>
+                    <div class="swiper-slide marquee_text_slide"><span class="marquee_text_bullet" aria-hidden="true">✦</span></div>
+                    <div class="swiper-slide marquee_text_slide"><span class="marquee_text_item c-heading" data-style="h2">Meditation</span></div>
+                    <div class="swiper-slide marquee_text_slide"><span class="marquee_text_bullet" aria-hidden="true">✦</span></div>
+                    <div class="swiper-slide marquee_text_slide"><span class="marquee_text_item c-heading" data-style="h2">Ahimsa</span></div>
+                    <div class="swiper-slide marquee_text_slide"><span class="marquee_text_bullet" aria-hidden="true">✦</span></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ════════════════ CTA BANNER ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">CTA Banner · end of pages</div>
+        <div class="sg-preview-hint">components/cta/cta-banner.html — brand theme, full-width</div>
+        <section class="cta_banner u-theme-brand u-padding-block-main">
+            <div class="u-container">
+                <div class="cta_banner_content u-content-wrapper u-alignment-center u-max-width-60ch">
+                    <h2 class="c-heading cta_banner_title" data-style="h2">Bereit, auf die Matte zu kommen?</h2>
+                    <p class="u-text-style-large cta_banner_lede">Probemonat für neue Schüler:innen: übe einen Monat so oft du möchtest für nur 58 €.</p>
+                    <div class="u-button-group u-margin-top-5">
+                        <div data-wf--button-main--variant="primary" class="button_main_wrap" data-trigger="hover focus">
+                            <div class="clickable_wrap u-cover-absolute"><a href="preise.html" class="clickable_link w-inline-block" aria-label="Probemonat starten"></a></div>
+                            <div class="button_main_element"><div class="button_main_text u-text-style-main">Probemonat starten</div></div>
+                        </div>
+                        <div data-wf--button-main--variant="secondary" class="button_main_wrap" data-trigger="hover focus">
+                            <div class="clickable_wrap u-cover-absolute"><a href="stunden-stile.html" class="clickable_link w-inline-block" aria-label="Klassen-Stile entdecken"></a></div>
+                            <div class="button_main_element"><div class="button_main_text u-text-style-main">Klassen-Stile entdecken</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ════════════════ FOOTER ════════════════ -->
+    <div class="sg-preview-section">
+        <div class="sg-preview-label">Footer · global (dark theme)</div>
+        <div class="sg-preview-hint">components/footer/footer.html — four columns + meta row</div>
+        <footer class="footer_component u-theme-dark">
+            <div class="u-container u-padding-block-main">
+                <div class="footer_layout u-grid-autofit u-gap-inline-6 u-gap-row-6">
+                    <div class="footer_column footer_column_brand">
+                        <img src="assets/logos/munich-full-left--silk.svg" alt="Jivamukti Yoga München" class="footer_logo">
+                        <p class="footer_tagline u-text-style-main">Yoga Studios in München — Lehel & Glockenbach. Ein Weg zur Erleuchtung durch Mitgefühl für alle Wesen.</p>
+                    </div>
+                    <div class="footer_column">
+                        <h4 class="footer_heading u-text-style-h5">Studio Lehel</h4>
+                        <address class="footer_address u-text-style-small">Robert-Koch-Str. 13<br>80538 München<br><a href="mailto:lehel@jivamuktimunich.com" class="footer_link">lehel@jivamuktimunich.com</a></address>
+                        <a href="stundenplan-lehel.html" class="footer_link u-text-style-main">Stundenplan Lehel →</a>
+                    </div>
+                    <div class="footer_column">
+                        <h4 class="footer_heading u-text-style-h5">Studio Glockenbach</h4>
+                        <address class="footer_address u-text-style-small">Müllerstr. 33 (Hinterhof)<br>80469 München<br><a href="mailto:glockenbach@jivamuktimunich.com" class="footer_link">glockenbach@jivamuktimunich.com</a></address>
+                        <a href="stundenplan-glockenbach.html" class="footer_link u-text-style-main">Stundenplan Glockenbach →</a>
+                    </div>
+                    <div class="footer_column footer_column_newsletter">
+                        <h4 class="footer_heading u-text-style-h5">Bleib auf dem Laufenden</h4>
+                        <p class="footer_newsletter_text u-text-style-small">Monatliche Updates zu neuen Klassen, Retreats und Events.</p>
+                        <form action="#" method="post" class="footer_newsletter_form">
+                            <label for="preview-newsletter-email" class="u-sr-only">E-Mail-Adresse</label>
+                            <input type="email" id="preview-newsletter-email" name="email" placeholder="Deine E-Mail" required class="footer_newsletter_input">
+                            <button type="submit" class="footer_newsletter_submit" aria-label="Abonnieren">→</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer_meta u-flex-horizontal-wrap u-justify-content-between u-gap-inline-4 u-gap-row-3">
+                    <div class="footer_meta_copy u-text-style-small">© <span class="footer_year">2026</span> Jivamukti Yoga München. Alle Rechte vorbehalten.</div>
+                    <ul role="list" class="footer_meta_links u-flex-horizontal-wrap u-gap-inline-4 w-list-unstyled">
+                        <li><a href="impressum.html" class="footer_link u-text-style-small">Impressum</a></li>
+                        <li><a href="datenschutz.html" class="footer_link u-text-style-small">Datenschutz</a></li>
+                        <li><a href="agb.html" class="footer_link u-text-style-small">AGB</a></li>
+                        <li><a href="https://instagram.com/jivamuktiyogamunich" target="_blank" rel="noopener" class="footer_link u-text-style-small">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ════════════════ DARK THEME VARIANTS ════════════════ -->
+    <div class="sg-preview-section u-theme-dark">
+        <div class="sg-preview-label">CTA Banner · dark theme variant</div>
+        <div class="sg-preview-hint">Shown on dark sections</div>
+        <section class="cta_banner u-theme-brand u-padding-block-main">
+            <div class="u-container">
+                <div class="cta_banner_content u-content-wrapper u-alignment-center u-max-width-60ch">
+                    <h2 class="c-heading cta_banner_title" data-style="h2">Komm vorbei, im Glockenbach und Lehel.</h2>
+                    <p class="u-text-style-large cta_banner_lede">Unbegrenzte Klassen in beiden Studios für €99/Monat.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="components/carousel/carousel-classes.js"></script>
+<script src="components/marquee/marquee-text.js"></script>
+</body>
+</html>

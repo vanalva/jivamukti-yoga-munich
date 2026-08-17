@@ -1,0 +1,23 @@
+<!-- Component: Teacher Card — Jivamukti Yoga München
+     Usage: das-team page. Grid of teacher portraits with bio on hover/click.
+     Repeat this block inside u-grid-autofit for multiple teachers. -->
+<article class="teacher_card u-position-relative" data-trigger="hover focus">
+    <div class="teacher_card_media image-wrap image-wrap--portrait-tall image-wrap--rounded">
+        <img src="assets/teacher-placeholder.webp" alt="Jessina — Jivamukti Teacher" class="image-wrap__img image-wrap__img--cover image-wrap__img--top">
+    </div>
+
+    <div class="teacher_card_body">
+        <h3 class="c-heading teacher_card_name" data-style="h4">Jessina</h3>
+        <p class="teacher_card_role u-text-style-small u-letter-spacing-wider u-text-transform-uppercase">Senior Teacher · Jivamukti 300HR</p>
+        <p class="teacher_card_bio u-text-style-main u-line-clamp-3">
+            Jessina unterrichtet seit 12 Jahren und verbindet Vinyasa, Philosophie und Bhakti in ihren Klassen. Ausgebildet bei Sharon Gannon und David Life in New York.
+        </p>
+    </div>
+
+    <!-- Clickable overlay — whole card links to teacher detail -->
+    <div class="clickable_wrap u-cover-absolute">
+        <a href="das-team/jessina.html" class="clickable_link w-inline-block">
+            <span class="clickable_text u-sr-only">Mehr über Jessina</span>
+        </a>
+    </div>
+</article>

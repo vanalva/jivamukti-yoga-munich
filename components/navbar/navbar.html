@@ -1,0 +1,109 @@
+<!-- Component: Navbar — Jivamukti Yoga München
+     Usage: Goes inside page_wrap, before page_main.
+     Class names match framework.css ported from Düsseldorf template. -->
+<div data-wf--nav--nav-position="overlap" class="nav_component">
+
+    <!-- Skip link for keyboard nav -->
+    <a href="#main" class="nav_skip_wrap w-inline-block">
+        <div class="nav_skip_text u-text-style-small">Zum Hauptinhalt springen</div>
+    </a>
+
+    <!-- Announcement banner (optional) -->
+    <div aria-label="Ankündigung" role="region" class="nav_banner_wrap u-theme-brand">
+        <div class="nav_banner_contain">
+            <a href="preise.html" class="nav_banner_link w-inline-block">
+                <div class="nav_banner_text u-line-clamp-1">Probemonat — Übe einen Monat so oft du möchtest für nur 58€</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Desktop navigation -->
+    <header class="nav_desktop_wrap">
+        <div class="nav_desktop_contain">
+            <div class="nav_desktop_layout">
+
+                <!-- Logo -->
+                <a aria-label="Startseite" href="index.html" class="nav_desktop_logo w-inline-block">
+                    <img src="assets/logos/munich-vertical--density.svg" alt="Jivamukti Yoga München" class="nav_logo_image">
+                </a>
+
+                <!-- Main links -->
+                <nav aria-label="Hauptnavigation" class="nav_links_component">
+                    <ul role="list" class="nav_links_wrap w-list-unstyled">
+                        <li class="nav_links_item"><a href="index.html" class="nav_links_link w-inline-block"><div class="nav_links_text">Startseite</div></a></li>
+
+                        <li class="nav_links_item">
+                            <div data-delay="0" data-hover="true" class="nav_dropdown_component w-dropdown">
+                                <div class="nav_links_link w-dropdown-toggle">
+                                    <div class="nav_links_text">Stundenplan</div>
+                                </div>
+                                <nav class="nav_dropdown_main_wrap w-dropdown-list">
+                                    <div class="nav_dropdown_main_content">
+                                        <ul role="list" class="nav_dropdown_list">
+                                            <li class="nav_dropdown_item"><a href="stundenplan-lehel.html" class="nav_dropdown_link w-inline-block"><div class="nav_dropdown_text">Stundenplan Lehel</div></a></li>
+                                            <li class="nav_dropdown_item"><a href="stundenplan-glockenbach.html" class="nav_dropdown_link w-inline-block"><div class="nav_dropdown_text">Stundenplan Glockenbach</div></a></li>
+                                            <li class="nav_dropdown_item"><a href="stunden-stile.html" class="nav_dropdown_link w-inline-block"><div class="nav_dropdown_text">Klassen-Stile</div></a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </li>
+
+                        <li class="nav_links_item">
+                            <div data-delay="0" data-hover="true" class="nav_dropdown_component w-dropdown">
+                                <div class="nav_links_link w-dropdown-toggle">
+                                    <div class="nav_links_text">Studios</div>
+                                </div>
+                                <nav class="nav_dropdown_main_wrap w-dropdown-list">
+                                    <div class="nav_dropdown_main_content">
+                                        <ul role="list" class="nav_dropdown_list">
+                                            <li class="nav_dropdown_item"><a href="unsere-studios.html" class="nav_dropdown_link w-inline-block"><div class="nav_dropdown_text">Unsere Studios</div></a></li>
+                                            <li class="nav_dropdown_item"><a href="das-team.html" class="nav_dropdown_link w-inline-block"><div class="nav_dropdown_text">Das Team</div></a></li>
+                                            <li class="nav_dropdown_item"><a href="jivamukti-methode.html" class="nav_dropdown_link w-inline-block"><div class="nav_dropdown_text">Jivamukti-Methode</div></a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </li>
+
+                        <li class="nav_links_item"><a href="preise.html" class="nav_links_link w-inline-block"><div class="nav_links_text">Preise</div></a></li>
+
+                        <li class="nav_links_item">
+                            <div data-delay="0" data-hover="true" class="nav_dropdown_component w-dropdown">
+                                <div class="nav_links_link w-dropdown-toggle">
+                                    <div class="nav_links_text">Entdecken</div>
+                                </div>
+                                <nav class="nav_dropdown_main_wrap w-dropdown-list">
+                                    <div class="nav_dropdown_main_content">
+                                        <ul role="list" class="nav_dropdown_list">
+                                            <li class="nav_dropdown_item"><a href="retreats.html" class="nav_dropdown_link w-inline-block"><div class="nav_dropdown_text">Retreats</div></a></li>
+                                            <li class="nav_dropdown_item"><a href="events.html" class="nav_dropdown_link w-inline-block"><div class="nav_dropdown_text">Events</div></a></li>
+                                            <li class="nav_dropdown_item"><a href="75hr-training.html" class="nav_dropdown_link w-inline-block"><div class="nav_dropdown_text">75HR Teacher Training</div></a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- CTA button -->
+                <div data-wf--button-main--variant="primary" class="button_main_wrap nav_cta_wrap" data-button=" " data-trigger="hover focus">
+                    <div data-wf--clickable--variant="focus-ring-outside" class="clickable_wrap u-cover-absolute">
+                        <a href="#" class="clickable_link w-inline-block" aria-label="Klassen buchen"></a>
+                    </div>
+                    <div class="button_main_element">
+                        <div class="button_main_text u-text-style-main">Klassen buchen</div>
+                    </div>
+                </div>
+
+                <!-- Mobile menu trigger -->
+                <button type="button" aria-label="Menü öffnen" data-modal-trigger="mobile-menu" class="nav_menu_trigger">
+                    <span class="nav_menu_trigger_bar"></span>
+                    <span class="nav_menu_trigger_bar"></span>
+                    <span class="nav_menu_trigger_bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+</div>

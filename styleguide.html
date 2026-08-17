@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jivamukti Yoga München — Design System</title>
+    <link rel="stylesheet" href="css/variables.css?v=9d88d0fc">
+    <link rel="stylesheet" href="css/framework.css?v=3096a668">
+    <link rel="stylesheet" href="css/project.css?v=5a56ba58">
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/png">
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+           sg-* — styleguide chrome only. NOT part of the design system.
+           Use framework classes on demo elements; sg-* only for layout.
+           ═══════════════════════════════════════════════════════════ */
+        .sg-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: 100vh;
+            background-color: var(--_theme---background);
+            color: var(--_theme---text);
+        }
+        .sg-sidebar {
+            position: sticky;
+            top: 0;
+            align-self: start;
+            height: 100vh;
+            overflow-y: auto;
+            padding-top: 2rem;
+            padding-right: 1rem;
+            padding-bottom: 2rem;
+            padding-left: 1.5rem;
+            background-color: var(--swatch--tertiary-500);
+            color: var(--swatch--tertiary-text);
+            font-size: 0.8125rem;
+            line-height: 1.5;
+        }
+        .sg-sidebar-brand {
+            display: flex;
+            flex-direction: column;
+            row-gap: 0.25rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: color-mix(in srgb, currentColor 20%, transparent);
+        }
+        .sg-sidebar-title {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        .sg-sidebar-meta {
+            opacity: 0.75;
+            font-size: 0.75rem;
+        }
+        .sg-sidebar nav { display: flex; flex-direction: column; row-gap: 0.125rem; }
+        .sg-sidebar a {
+            display: block;
+            padding-top: 0.35rem;
+            padding-right: 0.5rem;
+            padding-bottom: 0.35rem;
+            padding-left: 0.5rem;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            color: inherit;
+            text-decoration-line: none;
+            opacity: 0.85;
+        }
+        .sg-sidebar a:hover { opacity: 1; background-color: color-mix(in srgb, currentColor 15%, transparent); }
+        .sg-sidebar a.sg-sub { padding-left: 1.25rem; font-size: 0.75rem; opacity: 0.7; }
+        .sg-content { padding-top: 3rem; padding-right: 2.5rem; padding-bottom: 6rem; padding-left: 2.5rem; max-width: 1400px; }
+        .sg-section {
+            padding-top: 2.5rem;
+            padding-bottom: 3rem;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: var(--_theme---border);
+        }
+        .sg-section:first-of-type { padding-top: 0; }
+        .sg-h { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.01em; margin-top: 0; margin-bottom: 0.25rem; }
+        .sg-sub { font-size: 1rem; font-weight: 500; margin-top: 1.75rem; margin-bottom: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; opacity: 0.7; }
+        .sg-desc { font-size: 0.9375rem; opacity: 0.75; margin-top: 0; margin-bottom: 1.5rem; max-width: 70ch; }
+        .sg-code { font-family: "SFMono-Regular", ui-monospace, Consolas, monospace; font-size: 0.8125rem; background-color: color-mix(in srgb, var(--_theme---text) 8%, transparent); padding-top: 0.125rem; padding-right: 0.35rem; padding-bottom: 0.125rem; padding-left: 0.35rem; border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; }
+        .sg-swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 1rem; }
+        .sg-swatch { display: flex; flex-direction: column; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; overflow-x: hidden; overflow-y: hidden; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-top-color: var(--_theme---border); border-right-color: var(--_theme---border); border-bottom-color: var(--_theme---border); border-left-color: var(--_theme---border); }
+        .sg-swatch-chip { height: 64px; }
+        .sg-swatch-meta { padding-top: 0.4rem; padding-right: 0.5rem; padding-bottom: 0.5rem; padding-left: 0.5rem; font-size: 0.75rem; line-height: 1.3; }
+        .sg-swatch-name { font-family: ui-monospace, Consolas, monospace; font-size: 0.7rem; opacity: 0.75; display: block; }
+        .sg-demo { padding-top: 1rem; padding-right: 1rem; padding-bottom: 1rem; padding-left: 1rem; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: dashed; border-right-style: dashed; border-bottom-style: dashed; border-left-style: dashed; border-top-color: var(--_theme---border); border-right-color: var(--_theme---border); border-bottom-color: var(--_theme---border); border-left-color: var(--_theme---border); border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; margin-bottom: 0.75rem; }
+        .sg-demo-tint { background-color: color-mix(in srgb, var(--swatch--brand-500) 15%, transparent); color: var(--_theme---text); padding-top: 0.5rem; padding-right: 0.75rem; padding-bottom: 0.5rem; padding-left: 0.75rem; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; font-size: 0.8125rem; }
+        .sg-demo-cell { background-color: var(--swatch--brand-500); color: var(--swatch--brand-text); padding-top: 0.75rem; padding-right: 0.75rem; padding-bottom: 0.75rem; padding-left: 0.75rem; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; font-family: ui-monospace, Consolas, monospace; font-size: 0.75rem; text-align: center; }
+        .sg-demo-cell--alt { background-color: var(--swatch--secondary-500); color: var(--swatch--secondary-text); }
+        .sg-demo-cell--mute { background-color: color-mix(in srgb, var(--_theme---text) 15%, transparent); color: var(--_theme---text); }
+        .sg-bar { background-color: var(--swatch--brand-500); height: 1rem; border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; }
+        .sg-bar-row { display: grid; grid-template-columns: 12rem 1fr 5rem; gap: 1rem; align-items: center; margin-bottom: 0.5rem; font-size: 0.8125rem; }
+        .sg-bar-row code { font-family: ui-monospace, Consolas, monospace; font-size: 0.75rem; opacity: 0.85; }
+        .sg-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; margin-top: 0.5rem; }
+        .sg-table th, .sg-table td { padding-top: 0.5rem; padding-right: 0.75rem; padding-bottom: 0.5rem; padding-left: 0.75rem; text-align: left; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: var(--_theme---border); }
+        .sg-table th { font-weight: 600; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem; }
+        .sg-table code { font-family: ui-monospace, Consolas, monospace; font-size: 0.75rem; }
+        .sg-class-idx { max-height: 640px; overflow-y: auto; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-top-color: var(--_theme---border); border-right-color: var(--_theme---border); border-bottom-color: var(--_theme---border); border-left-color: var(--_theme---border); border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; }
+        .sg-class-idx table { border-collapse: collapse; width: 100%; font-size: 0.8125rem; }
+        .sg-class-idx th { position: sticky; top: 0; background-color: var(--_theme---background-2); z-index: 1; padding-top: 0.5rem; padding-right: 0.75rem; padding-bottom: 0.5rem; padding-left: 0.75rem; text-align: left; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: var(--_theme---border); }
+        .sg-class-idx td { padding-top: 0.35rem; padding-right: 0.75rem; padding-bottom: 0.35rem; padding-left: 0.75rem; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: color-mix(in srgb, var(--_theme---border) 40%, transparent); vertical-align: top; }
+        .sg-class-idx tr.sg-group-row td { background-color: color-mix(in srgb, var(--swatch--brand-500) 10%, transparent); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+        .sg-class-idx code { font-family: ui-monospace, Consolas, monospace; font-size: 0.75rem; }
+        .sg-flex-demo { display: flex; gap: 0.5rem; min-height: 4rem; padding-top: 0.5rem; padding-right: 0.5rem; padding-bottom: 0.5rem; padding-left: 0.5rem; background-color: color-mix(in srgb, var(--_theme---text) 5%, transparent); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; }
+        .sg-theme-card {
+            padding-top: 1.25rem; padding-right: 1.25rem; padding-bottom: 1.25rem; padding-left: 1.25rem;
+            background-color: var(--_theme---background);
+            color: var(--_theme---text);
+            border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px;
+            border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid;
+            border-top-color: var(--_theme---border); border-right-color: var(--_theme---border); border-bottom-color: var(--_theme---border); border-left-color: var(--_theme---border);
+            border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;
+        }
+        .sg-theme-card h4 { margin-top: 0; margin-bottom: 0.5rem; }
+        .sg-cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .sg-cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .sg-logo-strip { display: flex; flex-direction: row; flex-wrap: wrap; gap: 1.25rem; align-items: center; padding-top: 1.25rem; padding-right: 1.25rem; padding-bottom: 1.25rem; padding-left: 1.25rem; background-color: var(--_theme---background-2); border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; margin-bottom: 1rem; }
+        .sg-logo-strip img { height: 40px; width: auto; }
+        .sg-key-row { display: flex; flex-direction: row; flex-wrap: wrap; row-gap: 0.25rem; column-gap: 0.5rem; margin-bottom: 1rem; }
+        .sg-key-row span { display: inline-block; padding-top: 0.15rem; padding-right: 0.5rem; padding-bottom: 0.15rem; padding-left: 0.5rem; background-color: var(--swatch--tertiary-500); color: var(--swatch--tertiary-text); font-size: 0.7rem; font-family: ui-monospace, Consolas, monospace; border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; }
+        .sg-stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .sg-stat { padding-top: 1rem; padding-right: 1.25rem; padding-bottom: 1rem; padding-left: 1.25rem; background-color: color-mix(in srgb, var(--swatch--brand-500) 10%, transparent); border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; }
+        .sg-stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; }
+        .sg-stat-value { font-size: 1.5rem; font-weight: 700; margin-top: 0.25rem; }
+        /* sg-* demo sizing helpers — scoped to styleguide chrome. Used on demo
+           elements that need a visible height, width, or layout hint that has
+           no framework-class equivalent. Framework-class demos always use the
+           real framework class as the PRIMARY class; sg-* is additive only. */
+        .sg-h-sm { height: 3rem; }
+        .sg-h-md { height: 4rem; }
+        .sg-h-lg { height: 5rem; }
+        .sg-h-xl { height: 6rem; }
+        .sg-minh-sm { min-height: 3rem; }
+        .sg-minh-md { min-height: 5rem; }
+        .sg-square-lg { width: 6rem; height: 6rem; }
+        .sg-img-h { height: 80px; }
+        .sg-logo-h { height: 32px; }
+        .sg-icon { width: 3rem; height: 3rem; }
+        .sg-center-grid { display: grid; place-items: center; }
+        .sg-ratio-21-9 { aspect-ratio: 21 / 9; }
+        .sg-ratio-9-16 { aspect-ratio: 9 / 16; }
+        .sg-maxw-narrow { max-width: 16rem; }
+        .sg-maxw-modal { max-width: 32rem; }
+        .sg-maxw-circle { max-width: 160px; }
+        .sg-maxh-freeform { max-height: 160px; }
+        .sg-pinned-tl { top: 0; left: 0; }
+        .sg-pinned-br { bottom: 0; right: 0; }
+        .sg-nowrap { white-space: nowrap; }
+        .sg-centered { text-align: center; }
+        .sg-list-reset { list-style-type: none; padding-left: 0; margin-top: 0; margin-bottom: 0; }
+        .sg-code-block { white-space: pre-wrap; padding-top: 1rem; padding-right: 1rem; padding-bottom: 1rem; padding-left: 1rem; display: block; }
+        .sg-no-mt { margin-top: 0; }
+        .sg-accent-lg { font-size: 1.25rem; font-weight: 700; }
+        .sg-typo-specimen { font-family: var(--_typography---font--primary-family); font-size: 1.5rem; line-height: 1.3; }
+        .sg-state-btn {
+            border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;
+            background-color: color-mix(in srgb, var(--swatch--brand-500) calc(var(--_state---true) * 100%), var(--_theme---background-2));
+            color: var(--_theme---text);
+            cursor: pointer;
+        }
+        .sg-state-btn + .sg-state-btn { margin-left: 0.5rem; }
+        .sg-close-round {
+            width: 2.5rem; height: 2.5rem;
+            border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;
+            background-color: var(--_theme---text); color: var(--_theme---background);
+        }
+        .sg-modal {
+            max-width: 32rem;
+            border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;
+        }
+    </style>
+</head>
+<body class="u-theme-light">
+    <div class="sg-layout">
+        <aside class="sg-sidebar">
+            <div class="sg-sidebar-brand">
+                <span class="sg-sidebar-title">Jivamukti München</span>
+                <span class="sg-sidebar-meta">LUMOS Design System</span>
+            </div>
+            <nav>
+                <a href="#section-1">1. Overview</a>
+                <a href="#section-2">2. Colors</a>
+                <a href="#section-2a" class="sg-sub">2a. Primitive swatches</a>
+                <a href="#section-2b" class="sg-sub">2b. Theme semantic</a>
+                <a href="#section-2c" class="sg-sub">2c. Theme modes</a>
+                <a href="#section-3">3. Typography</a>
+                <a href="#section-3a" class="sg-sub">3a. Font families</a>
+                <a href="#section-3b" class="sg-sub">3b. Heading scale</a>
+                <a href="#section-3c" class="sg-sub">3c. Text styles</a>
+                <a href="#section-3d" class="sg-sub">3d. Weights</a>
+                <a href="#section-3e" class="sg-sub">3e. Line heights</a>
+                <a href="#section-3f" class="sg-sub">3f. Letter spacing</a>
+                <a href="#section-3g" class="sg-sub">3g. Transforms</a>
+                <a href="#section-3h" class="sg-sub">3h. Utilities</a>
+                <a href="#section-4">4. Spacing</a>
+                <a href="#section-4a" class="sg-sub">4a. Scale</a>
+                <a href="#section-4b" class="sg-sub">4b. Gaps</a>
+                <a href="#section-4c" class="sg-sub">4c. Margins</a>
+                <a href="#section-4d" class="sg-sub">4d. Paddings</a>
+                <a href="#section-5">5. Layout</a>
+                <a href="#section-5a" class="sg-sub">5a. Containers</a>
+                <a href="#section-5b" class="sg-sub">5b. Grid</a>
+                <a href="#section-5c" class="sg-sub">5c. Flexbox</a>
+                <a href="#section-6">6. Sizing & Visibility</a>
+                <a href="#section-7">7. Components</a>
+                <a href="#section-7a" class="sg-sub">7a. Buttons</a>
+                <a href="#section-7b" class="sg-sub">7b. Image wrappers</a>
+                <a href="#section-7c" class="sg-sub">7c. Clickable</a>
+                <a href="#section-7d" class="sg-sub">7d. Close button</a>
+                <a href="#section-7e" class="sg-sub">7e. Navigation</a>
+                <a href="#section-7f" class="sg-sub">7f. Modal</a>
+                <a href="#section-8">8. State & Trigger</a>
+                <a href="#section-9">9. Accessibility</a>
+                <a href="#section-10">10. Breakpointless</a>
+                <a href="#section-11">11. SVG & Icons</a>
+                <a href="#section-12">12. Class index</a>
+                <a href="#section-13">13. Project custom</a>
+            </nav>
+        </aside>
+
+        <main class="sg-content">
+
+<!-- ═══════════════════ SECTION 1 — OVERVIEW ═══════════════════ -->
+<section id="section-1" class="sg-section">
+    <h1 class="sg-h">Jivamukti Yoga München — Design System</h1>
+    <p class="sg-desc">Ported from the Düsseldorf Flowriter template, repainted to Munich's warm saffron palette. Every token, class, and component below matches what will render in Webflow after Flowriter import.</p>
+
+    <div class="sg-logo-strip">
+        <img src="assets/logos/munich-vertical--density.svg" alt="Jivamukti München horizontal primary logo">
+        <img src="assets/logos/munich-left--qatar.svg" alt="Jivamukti München horizontal secondary logo">
+        <img src="assets/logos/munich-full-left--silk.svg" alt="Jivamukti München vertical secondary logo">
+    </div>
+
+    <div class="sg-stat-grid">
+        <div class="sg-stat"><div class="sg-stat-label">Framework</div><div class="sg-stat-value">LUMOS</div></div>
+        <div class="sg-stat"><div class="sg-stat-label">Variables</div><div class="sg-stat-value">160+</div></div>
+        <div class="sg-stat"><div class="sg-stat-label">Classes</div><div class="sg-stat-value">420+</div></div>
+        <div class="sg-stat"><div class="sg-stat-label">Breakpoints</div><div class="sg-stat-value">3</div></div>
+        <div class="sg-stat"><div class="sg-stat-label">Themes</div><div class="sg-stat-value">Light · Dark</div></div>
+    </div>
+
+    <h2 class="sg-sub">How this styleguide is organised</h2>
+    <table class="sg-table">
+        <tr><th>Section</th><th>Purpose</th></tr>
+        <tr><td><a href="#section-2">2. Colors</a></td><td>Primitive swatches, theme-semantic tokens, live theme-mode comparison</td></tr>
+        <tr><td><a href="#section-3">3. Typography</a></td><td>Montserrat family, fluid heading scale, weights, transforms, line-clamp</td></tr>
+        <tr><td><a href="#section-4">4. Spacing</a></td><td>Fluid scale + every gap, margin, and padding utility demoed</td></tr>
+        <tr><td><a href="#section-5">5. Layout</a></td><td>Containers, six grid types, flex alignment modes — all rendered</td></tr>
+        <tr><td><a href="#section-6">6. Sizing &amp; Visibility</a></td><td>Widths, aspect ratios, position, overflow, radius</td></tr>
+        <tr><td><a href="#section-7">7. Components</a></td><td>Buttons (3-layer LUMOS structure), image wrappers, clickable, close, nav, modal</td></tr>
+        <tr><td><a href="#section-8">8. State &amp; Trigger</a></td><td>data-state / data-trigger CSS-variable wiring</td></tr>
+        <tr><td><a href="#section-9">9. Accessibility</a></td><td>Skip-link, focus, aria-label, screen-reader-only</td></tr>
+        <tr><td><a href="#section-10">10. Breakpointless</a></td><td>Container queries, fluid values, fallback media queries</td></tr>
+        <tr><td><a href="#section-11">11. SVG &amp; Icons</a></td><td>u-svg + u-path, non-scaling-stroke</td></tr>
+        <tr><td><a href="#section-12">12. Class index</a></td><td>Every LUMOS utility in a single scrollable table — one row per class</td></tr>
+        <tr><td><a href="#section-13">13. Project custom</a></td><td>Classes that extend LUMOS for Munich-only needs</td></tr>
+    </table>
+
+    <h2 class="sg-sub">Template lineage — Düsseldorf → München</h2>
+    <p class="sg-desc">Munich is a palette swap of the Düsseldorf Jivamukti template. Everything else — spacing scale, typography rhythm, component patterns, JS behaviour — is identical. Only the tokens below differ:</p>
+    <table class="sg-table">
+        <tr><th>Role</th><th>Düsseldorf</th><th>München</th><th>Variable</th></tr>
+        <tr><td>Brand accent</td><td>#db4e3b (rust)</td><td>#e68600 (saffron)</td><td><code>--swatch--brand-500</code></td></tr>
+        <tr><td>Page background</td><td>#f9e4d9 (beige)</td><td>#f1eae0 (cream)</td><td><code>--swatch--light-200</code></td></tr>
+        <tr><td>Secondary</td><td>#7880a9 (slate)</td><td>#7f99b5 (slate)</td><td><code>--swatch--secondary-500</code></td></tr>
+        <tr><td>Tertiary (shared)</td><td>#0d3333</td><td>#0d3333</td><td><code>--swatch--tertiary-500</code></td></tr>
+        <tr><td>Ink</td><td>#1a1a1a</td><td>#191a1c</td><td><code>--swatch--dark-900</code></td></tr>
+    </table>
+
+    <h2 class="sg-sub">Next steps — build pipeline after this styleguide</h2>
+    <ol>
+        <li><strong><code>/components</code></strong> — scaffold navbar, footer, hero variants, card patterns, pricing cards using these tokens.</li>
+        <li><strong><code>/build-page</code></strong> — assemble 14 pages: Home, Stundenplan Lehel, Stundenplan Glockenbach, Unsere Studios, Das Team, Stunden-Stile, Preise, Retreats, Events, 75HR Training, Jivamukti-Methode, News, plus legal pages.</li>
+        <li><strong><code>/validate</code></strong> — audit for shorthand CSS, forbidden patterns, container queries.</li>
+        <li><strong><code>/convert</code></strong> — flatten and package for Flowriter import into Webflow.</li>
+    </ol>
+
+    <h2 class="sg-sub">Brand colour strip</h2>
+    <div class="sg-swatch-grid">
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-demo-bg="brand"></div><div class="sg-swatch-meta"><strong>Saffron</strong><span class="sg-swatch-name">--swatch--brand-500</span>#e68600</div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-demo-bg="cream"></div><div class="sg-swatch-meta"><strong>Cream</strong><span class="sg-swatch-name">--swatch--light-200</span>#f1eae0</div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-demo-bg="teal"></div><div class="sg-swatch-meta"><strong>Deep Teal</strong><span class="sg-swatch-name">--swatch--tertiary-500</span>#0d3333</div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-demo-bg="blue"></div><div class="sg-swatch-meta"><strong>Slate Blue</strong><span class="sg-swatch-name">--swatch--secondary-500</span>#7f99b5</div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-demo-bg="near-black"></div><div class="sg-swatch-meta"><strong>Ink</strong><span class="sg-swatch-name">--swatch--dark-900</span>#191a1c</div></div>
+    </div>
+    <style>
+        [data-demo-bg="brand"] { background-color: var(--swatch--brand-500); }
+        [data-demo-bg="cream"] { background-color: var(--swatch--light-200); }
+        [data-demo-bg="teal"] { background-color: var(--swatch--tertiary-500); }
+        [data-demo-bg="blue"] { background-color: var(--swatch--secondary-500); }
+        [data-demo-bg="near-black"] { background-color: var(--swatch--dark-900); }
+    </style>
+</section>
+
+<!-- ═══════════════════ SECTION 2 — COLORS ═══════════════════ -->
+<section id="section-2" class="sg-section">
+    <h2 class="sg-h">2. Colors</h2>
+    <p class="sg-desc">Primitive swatches feed theme-semantic tokens. Change a swatch — every theme, component, and button that references it updates.</p>
+
+    <h3 id="section-2a" class="sg-sub">2a. Primitive swatches</h3>
+    <p class="sg-desc">All <code class="sg-code">--swatch--*</code> variables from <code class="sg-code">variables.css</code>. Tints/shades computed via <code class="sg-code">color-mix()</code> — change the 500 value, the scale recomputes.</p>
+
+    <h4 class="sg-sub">Brand (saffron)</h4>
+    <div class="sg-swatch-grid">
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="brand-100"></div><div class="sg-swatch-meta"><strong>brand-100</strong><span class="sg-swatch-name">--swatch--brand-100</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="brand-200"></div><div class="sg-swatch-meta"><strong>brand-200</strong><span class="sg-swatch-name">--swatch--brand-200</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="brand-300"></div><div class="sg-swatch-meta"><strong>brand-300</strong><span class="sg-swatch-name">--swatch--brand-300</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="brand-400"></div><div class="sg-swatch-meta"><strong>brand-400</strong><span class="sg-swatch-name">--swatch--brand-400</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="brand-500"></div><div class="sg-swatch-meta"><strong>brand-500</strong><span class="sg-swatch-name">--swatch--brand-500</span>#e68600</div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="brand-600"></div><div class="sg-swatch-meta"><strong>brand-600</strong><span class="sg-swatch-name">--swatch--brand-600</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="brand-700"></div><div class="sg-swatch-meta"><strong>brand-700</strong><span class="sg-swatch-name">--swatch--brand-700</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="brand-800"></div><div class="sg-swatch-meta"><strong>brand-800</strong><span class="sg-swatch-name">--swatch--brand-800</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="brand-900"></div><div class="sg-swatch-meta"><strong>brand-900</strong><span class="sg-swatch-name">--swatch--brand-900</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="brand-text"></div><div class="sg-swatch-meta"><strong>brand-text</strong><span class="sg-swatch-name">--swatch--brand-text</span></div></div>
+    </div>
+
+    <h4 class="sg-sub">Secondary (slate blue)</h4>
+    <div class="sg-swatch-grid">
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="secondary-100"></div><div class="sg-swatch-meta"><strong>secondary-100</strong><span class="sg-swatch-name">--swatch--secondary-100</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="secondary-200"></div><div class="sg-swatch-meta"><strong>secondary-200</strong><span class="sg-swatch-name">--swatch--secondary-200</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="secondary-300"></div><div class="sg-swatch-meta"><strong>secondary-300</strong><span class="sg-swatch-name">--swatch--secondary-300</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="secondary-400"></div><div class="sg-swatch-meta"><strong>secondary-400</strong><span class="sg-swatch-name">--swatch--secondary-400</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="secondary-500"></div><div class="sg-swatch-meta"><strong>secondary-500</strong><span class="sg-swatch-name">--swatch--secondary-500</span>#7f99b5</div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="secondary-600"></div><div class="sg-swatch-meta"><strong>secondary-600</strong><span class="sg-swatch-name">--swatch--secondary-600</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="secondary-700"></div><div class="sg-swatch-meta"><strong>secondary-700</strong><span class="sg-swatch-name">--swatch--secondary-700</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="secondary-800"></div><div class="sg-swatch-meta"><strong>secondary-800</strong><span class="sg-swatch-name">--swatch--secondary-800</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="secondary-900"></div><div class="sg-swatch-meta"><strong>secondary-900</strong><span class="sg-swatch-name">--swatch--secondary-900</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="secondary-text"></div><div class="sg-swatch-meta"><strong>secondary-text</strong><span class="sg-swatch-name">--swatch--secondary-text</span></div></div>
+    </div>
+
+    <h4 class="sg-sub">Tertiary (deep teal)</h4>
+    <div class="sg-swatch-grid">
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="tertiary-100"></div><div class="sg-swatch-meta"><strong>tertiary-100</strong><span class="sg-swatch-name">--swatch--tertiary-100</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="tertiary-200"></div><div class="sg-swatch-meta"><strong>tertiary-200</strong><span class="sg-swatch-name">--swatch--tertiary-200</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="tertiary-300"></div><div class="sg-swatch-meta"><strong>tertiary-300</strong><span class="sg-swatch-name">--swatch--tertiary-300</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="tertiary-400"></div><div class="sg-swatch-meta"><strong>tertiary-400</strong><span class="sg-swatch-name">--swatch--tertiary-400</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="tertiary-500"></div><div class="sg-swatch-meta"><strong>tertiary-500</strong><span class="sg-swatch-name">--swatch--tertiary-500</span>#0d3333</div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="tertiary-600"></div><div class="sg-swatch-meta"><strong>tertiary-600</strong><span class="sg-swatch-name">--swatch--tertiary-600</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="tertiary-700"></div><div class="sg-swatch-meta"><strong>tertiary-700</strong><span class="sg-swatch-name">--swatch--tertiary-700</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="tertiary-800"></div><div class="sg-swatch-meta"><strong>tertiary-800</strong><span class="sg-swatch-name">--swatch--tertiary-800</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="tertiary-900"></div><div class="sg-swatch-meta"><strong>tertiary-900</strong><span class="sg-swatch-name">--swatch--tertiary-900</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="tertiary-text"></div><div class="sg-swatch-meta"><strong>tertiary-text</strong><span class="sg-swatch-name">--swatch--tertiary-text</span></div></div>
+    </div>
+
+    <h4 class="sg-sub">Neutrals</h4>
+    <div class="sg-swatch-grid">
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="light-100"></div><div class="sg-swatch-meta"><strong>light-100</strong><span class="sg-swatch-name">--swatch--light-100</span>#ffffff</div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="light-200"></div><div class="sg-swatch-meta"><strong>light-200</strong><span class="sg-swatch-name">--swatch--light-200</span>#f1eae0</div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="dark-800"></div><div class="sg-swatch-meta"><strong>dark-800</strong><span class="sg-swatch-name">--swatch--dark-800</span>#222222</div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="dark-900"></div><div class="sg-swatch-meta"><strong>dark-900</strong><span class="sg-swatch-name">--swatch--dark-900</span>#191a1c</div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" data-swatch="transparent"></div><div class="sg-swatch-meta"><strong>transparent</strong><span class="sg-swatch-name">--swatch--transparent</span></div></div>
+    </div>
+
+    <style>
+        [data-swatch="brand-100"] { background-color: var(--swatch--brand-100); }
+        [data-swatch="brand-200"] { background-color: var(--swatch--brand-200); }
+        [data-swatch="brand-300"] { background-color: var(--swatch--brand-300); }
+        [data-swatch="brand-400"] { background-color: var(--swatch--brand-400); }
+        [data-swatch="brand-500"] { background-color: var(--swatch--brand-500); }
+        [data-swatch="brand-600"] { background-color: var(--swatch--brand-600); }
+        [data-swatch="brand-700"] { background-color: var(--swatch--brand-700); }
+        [data-swatch="brand-800"] { background-color: var(--swatch--brand-800); }
+        [data-swatch="brand-900"] { background-color: var(--swatch--brand-900); }
+        [data-swatch="brand-text"] { background-color: var(--swatch--brand-text); }
+        [data-swatch="secondary-100"] { background-color: var(--swatch--secondary-100); }
+        [data-swatch="secondary-200"] { background-color: var(--swatch--secondary-200); }
+        [data-swatch="secondary-300"] { background-color: var(--swatch--secondary-300); }
+        [data-swatch="secondary-400"] { background-color: var(--swatch--secondary-400); }
+        [data-swatch="secondary-500"] { background-color: var(--swatch--secondary-500); }
+        [data-swatch="secondary-600"] { background-color: var(--swatch--secondary-600); }
+        [data-swatch="secondary-700"] { background-color: var(--swatch--secondary-700); }
+        [data-swatch="secondary-800"] { background-color: var(--swatch--secondary-800); }
+        [data-swatch="secondary-900"] { background-color: var(--swatch--secondary-900); }
+        [data-swatch="secondary-text"] { background-color: var(--swatch--secondary-text); }
+        [data-swatch="tertiary-100"] { background-color: var(--swatch--tertiary-100); }
+        [data-swatch="tertiary-200"] { background-color: var(--swatch--tertiary-200); }
+        [data-swatch="tertiary-300"] { background-color: var(--swatch--tertiary-300); }
+        [data-swatch="tertiary-400"] { background-color: var(--swatch--tertiary-400); }
+        [data-swatch="tertiary-500"] { background-color: var(--swatch--tertiary-500); }
+        [data-swatch="tertiary-600"] { background-color: var(--swatch--tertiary-600); }
+        [data-swatch="tertiary-700"] { background-color: var(--swatch--tertiary-700); }
+        [data-swatch="tertiary-800"] { background-color: var(--swatch--tertiary-800); }
+        [data-swatch="tertiary-900"] { background-color: var(--swatch--tertiary-900); }
+        [data-swatch="tertiary-text"] { background-color: var(--swatch--tertiary-text); }
+        [data-swatch="light-100"] { background-color: var(--swatch--light-100); border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: var(--_theme---border); }
+        [data-swatch="light-200"] { background-color: var(--swatch--light-200); }
+        [data-swatch="dark-800"] { background-color: var(--swatch--dark-800); }
+        [data-swatch="dark-900"] { background-color: var(--swatch--dark-900); }
+        [data-swatch="transparent"] { background-color: transparent; background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%); background-size: 12px 12px; background-position: 0 0, 0 6px, 6px -6px, -6px 0; }
+    </style>
+
+    <h3 id="section-2b" class="sg-sub">2b. Theme semantic tokens</h3>
+    <p class="sg-desc">Light and dark side-by-side. Each <code class="sg-code">--_theme---*</code> token reads from swatches and flips when <code class="sg-code">u-theme-dark</code> is applied.</p>
+    <div class="sg-cols-2">
+        <div class="u-theme-light sg-theme-card">
+            <h4>Light theme</h4>
+            <table class="sg-table">
+                <tr><td><code>--_theme---background</code></td><td>cream</td></tr>
+                <tr><td><code>--_theme---background-2</code></td><td>white</td></tr>
+                <tr><td><code>--_theme---text</code></td><td>ink</td></tr>
+                <tr><td><code>--_theme---border</code></td><td>ink 20%</td></tr>
+                <tr><td><code>--_theme---heading-accent</code></td><td>saffron</td></tr>
+                <tr><td><code>--_theme---button-primary--background</code></td><td>saffron</td></tr>
+                <tr><td><code>--_theme---button-primary--text</code></td><td>cream</td></tr>
+                <tr><td><code>--_theme---button-secondary--background</code></td><td>transparent</td></tr>
+                <tr><td><code>--_theme---button-secondary--text</code></td><td>ink</td></tr>
+                <tr><td><code>--_theme---text-link--border</code></td><td>ink 20%</td></tr>
+                <tr><td><code>--_theme---selection--background</code></td><td>cream</td></tr>
+            </table>
+        </div>
+        <div class="u-theme-dark sg-theme-card">
+            <h4>Dark theme</h4>
+            <table class="sg-table">
+                <tr><td><code>--_theme---background</code></td><td>ink</td></tr>
+                <tr><td><code>--_theme---background-2</code></td><td>dark-800</td></tr>
+                <tr><td><code>--_theme---text</code></td><td>white</td></tr>
+                <tr><td><code>--_theme---border</code></td><td>white 20%</td></tr>
+                <tr><td><code>--_theme---heading-accent</code></td><td>saffron</td></tr>
+                <tr><td><code>--_theme---button-primary--background</code></td><td>saffron</td></tr>
+                <tr><td><code>--_theme---button-primary--text</code></td><td>cream</td></tr>
+                <tr><td><code>--_theme---button-secondary--background</code></td><td>transparent</td></tr>
+                <tr><td><code>--_theme---button-secondary--text</code></td><td>white</td></tr>
+                <tr><td><code>--_theme---text-link--border</code></td><td>white 20%</td></tr>
+                <tr><td><code>--_theme---selection--background</code></td><td>cream</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <h3 id="section-2c" class="sg-sub">2c. Theme modes — same card, three modes</h3>
+    <p class="sg-desc">Apply <code class="sg-code">u-theme-light</code>, <code class="sg-code">u-theme-dark</code>, or <code class="sg-code">u-theme-inherit</code> at any level to switch the theme for that subtree.</p>
+    <div class="sg-cols-3">
+        <div class="u-theme-light sg-theme-card">
+            <h4>u-theme-light</h4>
+            <p>Willkommen bei Jivamukti München — a path to enlightenment through compassion for all beings.</p>
+            <span class="sg-key-row"><span>u-theme-light</span></span>
+        </div>
+        <div class="u-theme-dark sg-theme-card">
+            <h4>u-theme-dark</h4>
+            <p>Willkommen bei Jivamukti München — a path to enlightenment through compassion for all beings.</p>
+            <span class="sg-key-row"><span>u-theme-dark</span></span>
+        </div>
+        <div class="u-theme-inherit sg-theme-card">
+            <h4>u-theme-inherit</h4>
+            <p>Inherits the parent theme. Useful for components that must match their surroundings.</p>
+            <span class="sg-key-row"><span>u-theme-inherit</span></span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ SECTION 3 — TYPOGRAPHY ═══════════════════ -->
+<section id="section-3" class="sg-section">
+    <h2 class="sg-h">3. Typography</h2>
+    <p class="sg-desc">Single family: <strong>Montserrat</strong>. Fluid <code class="sg-code">clamp()</code> scales from 20rem to 90rem viewport; no breakpoints required.</p>
+
+    <h3 id="section-3a" class="sg-sub">3a. Font families</h3>
+    <div class="sg-demo">
+        <p class="sg-typo-specimen">Montserrat — Yoga für den Alltag. Die Jivamukti-Methode verbindet Asana, Pranayama, Bhakti und Meditation.</p>
+        <p><code class="sg-code">--_typography---font--primary-family: 'Montserrat', Helvetica, Arial, sans-serif</code></p>
+    </div>
+
+    <h3 id="section-3b" class="sg-sub">3b. Heading scale</h3>
+    <div class="sg-demo">
+        <h1 class="u-text-style-display sg-no-mt">Display · Jivamukti München</h1>
+        <h1 class="u-text-style-h1">H1 · Willkommen bei Jivamukti</h1>
+        <h2 class="u-text-style-h2">H2 · Stundenplan für beide Studios</h2>
+        <h3 class="u-text-style-h3">H3 · Lehel & Glockenbach</h3>
+        <h4 class="u-text-style-h4">H4 · 75HR Teacher Training</h4>
+        <h5 class="u-text-style-h5">H5 · Das Team</h5>
+        <h6 class="u-text-style-h6">H6 · Retreats & Events</h6>
+    </div>
+    <table class="sg-table">
+        <tr><th>Token</th><th>Min</th><th>Max</th><th>Class</th></tr>
+        <tr><td><code>font-size--display</code></td><td>2.75rem</td><td>5rem</td><td><code>u-text-style-display</code></td></tr>
+        <tr><td><code>font-size--h1</code></td><td>2.75rem</td><td>5rem</td><td><code>u-text-style-h1</code></td></tr>
+        <tr><td><code>font-size--h2</code></td><td>2rem</td><td>3.5rem</td><td><code>u-text-style-h2</code></td></tr>
+        <tr><td><code>font-size--h3</code></td><td>1.5rem</td><td>2.5rem</td><td><code>u-text-style-h3</code></td></tr>
+        <tr><td><code>font-size--h4</code></td><td>1.25rem</td><td>1.75rem</td><td><code>u-text-style-h4</code></td></tr>
+        <tr><td><code>font-size--h5</code></td><td>1rem</td><td>1.25rem</td><td><code>u-text-style-h5</code></td></tr>
+        <tr><td><code>font-size--h6</code></td><td>0.875rem</td><td>1rem</td><td><code>u-text-style-h6</code></td></tr>
+    </table>
+
+    <h3 id="section-3c" class="sg-sub">3c. Text styles</h3>
+    <div class="sg-demo">
+        <p class="u-text-style-large">u-text-style-large — large body copy for intros and feature descriptions, fluid 1rem → 1.375rem.</p>
+        <p class="u-text-style-main">u-text-style-main — default body paragraph, fluid 0.875rem → 1.25rem.</p>
+        <p class="u-text-style-small">u-text-style-small — small captions, legal, meta — fluid 0.75rem → 0.875rem.</p>
+    </div>
+
+    <h3 id="section-3d" class="sg-sub">3d. Font weights</h3>
+    <div class="sg-demo">
+        <p class="u-weight-regular">u-weight-regular — Regular (400). Yoga ist für alle da.</p>
+        <p class="u-weight-medium">u-weight-medium — Medium (500). Yoga ist für alle da.</p>
+        <p class="u-weight-bold">u-weight-bold — Bold (700). Yoga ist für alle da.</p>
+    </div>
+
+    <h3 id="section-3e" class="sg-sub">3e. Line heights</h3>
+    <div class="sg-demo">
+        <p class="u-line-height-small">u-line-height-small (1.2) — Lokah samastah sukhino bhavantu. May all beings everywhere be happy and free.</p>
+        <p class="u-line-height-medium">u-line-height-medium (1.3) — Lokah samastah sukhino bhavantu. May all beings everywhere be happy and free.</p>
+        <p class="u-line-height-large">u-line-height-large (1.4) — Lokah samastah sukhino bhavantu. May all beings everywhere be happy and free.</p>
+        <p class="u-line-height-huge">u-line-height-huge (1.6) — Lokah samastah sukhino bhavantu. May all beings everywhere be happy and free.</p>
+    </div>
+
+    <h3 id="section-3f" class="sg-sub">3f. Letter spacing</h3>
+    <div class="sg-demo">
+        <p class="u-letter-spacing-tight">u-letter-spacing-tight (-0.01em) — Jivamukti München</p>
+        <p class="u-letter-spacing-normal">u-letter-spacing-normal (0) — Jivamukti München</p>
+    </div>
+
+    <h3 id="section-3g" class="sg-sub">3g. Text transforms</h3>
+    <div class="sg-demo">
+        <p class="u-text-transform-none">u-text-transform-none — Stundenplan</p>
+        <p class="u-text-transform-uppercase">u-text-transform-uppercase — Stundenplan</p>
+        <p class="u-text-transform-capitalize">u-text-transform-capitalize — stundenplan heute</p>
+        <p class="u-text-transform-lowercase">u-text-transform-lowercase — STUNDENPLAN HEUTE</p>
+    </div>
+
+    <h3 id="section-3h" class="sg-sub">3h. Text utilities</h3>
+    <div class="sg-demo">
+        <p class="u-text-wrap-default">u-text-wrap-default — browser-default wrapping.</p>
+        <p class="u-text-wrap-balance">u-text-wrap-balance — balances line lengths; best for short headings.</p>
+        <p class="u-text-wrap-pretty">u-text-wrap-pretty — avoids orphaned last lines; best for body paragraphs.</p>
+        <p class="u-line-clamp-1">u-line-clamp-1 — Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p class="u-line-clamp-2">u-line-clamp-2 — Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud.</p>
+        <p class="u-line-clamp-3">u-line-clamp-3 — Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+        <p class="u-line-clamp-4">u-line-clamp-4 — Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate.</p>
+        <p class="u-heading-accent sg-accent-lg">u-heading-accent — saffron accent color on headings</p>
+        <p><span class="u-sr-only">u-sr-only — visually hidden but available to screen readers.</span><em>(hidden above this line for screen readers only)</em></p>
+    </div>
+</section>
+
+<!-- ═══════════════════ SECTION 4 — SPACING ═══════════════════ -->
+<section id="section-4" class="sg-section">
+    <h2 class="sg-h">4. Spacing</h2>
+    <p class="sg-desc">Every space token scales fluidly from the smallest viewport (20rem) to the largest (90rem). Bars below show the <em>maximum</em> size; all values clamp down on small screens.</p>
+
+    <h3 id="section-4a" class="sg-sub">4a. Spacing scale</h3>
+    <div class="sg-demo">
+        <div class="sg-bar-row"><code>--_spacing---space--1-8px</code><div class="sg-bar" data-w="space-1"></div><code>8px</code></div>
+        <div class="sg-bar-row"><code>--_spacing---space--2-12px</code><div class="sg-bar" data-w="space-2"></div><code>12px</code></div>
+        <div class="sg-bar-row"><code>--_spacing---space--3-16px</code><div class="sg-bar" data-w="space-3"></div><code>16px</code></div>
+        <div class="sg-bar-row"><code>--_spacing---space--4-24px</code><div class="sg-bar" data-w="space-4"></div><code>24px</code></div>
+        <div class="sg-bar-row"><code>--_spacing---space--5-32px</code><div class="sg-bar" data-w="space-5"></div><code>32px</code></div>
+        <div class="sg-bar-row"><code>--_spacing---space--6-40px</code><div class="sg-bar" data-w="space-6"></div><code>40px</code></div>
+        <div class="sg-bar-row"><code>--_spacing---space--7-48px</code><div class="sg-bar" data-w="space-7"></div><code>48px</code></div>
+        <div class="sg-bar-row"><code>--_spacing---space--8-64px</code><div class="sg-bar" data-w="space-8"></div><code>64px</code></div>
+        <div class="sg-bar-row"><code>section-space--small-80px</code><div class="sg-bar" data-w="sec-sm"></div><code>80px</code></div>
+        <div class="sg-bar-row"><code>section-space--main-112px</code><div class="sg-bar" data-w="sec-md"></div><code>112px</code></div>
+        <div class="sg-bar-row"><code>section-space--large-160px</code><div class="sg-bar" data-w="sec-lg"></div><code>160px</code></div>
+        <div class="sg-bar-row"><code>section-space--page-top-224px</code><div class="sg-bar" data-w="sec-top"></div><code>224px</code></div>
+    </div>
+    <style>
+        [data-w="space-1"] { width: 8px; } [data-w="space-2"] { width: 12px; } [data-w="space-3"] { width: 16px; }
+        [data-w="space-4"] { width: 24px; } [data-w="space-5"] { width: 32px; } [data-w="space-6"] { width: 40px; }
+        [data-w="space-7"] { width: 48px; } [data-w="space-8"] { width: 64px; }
+        [data-w="sec-sm"] { width: 80px; } [data-w="sec-md"] { width: 112px; } [data-w="sec-lg"] { width: 160px; } [data-w="sec-top"] { width: 224px; }
+    </style>
+
+    <h3 id="section-4b" class="sg-sub">4b. Gap utilities</h3>
+    <p class="sg-desc">Applied to flex/grid containers. Row = vertical between rows; Inline = horizontal between columns.</p>
+
+    <h4 class="sg-sub">u-gap-inline-* (column gap)</h4>
+    <div class="u-flex-horizontal-wrap u-gap-inline-gutter sg-demo"><div class="sg-demo-cell">gutter</div><div class="sg-demo-cell">gutter</div><div class="sg-demo-cell">gutter</div></div>
+    <div class="u-flex-horizontal-wrap u-gap-inline-0 sg-demo"><div class="sg-demo-cell">0</div><div class="sg-demo-cell">0</div><div class="sg-demo-cell">0</div></div>
+    <div class="u-flex-horizontal-wrap u-gap-inline-1 sg-demo"><div class="sg-demo-cell">1</div><div class="sg-demo-cell">1</div><div class="sg-demo-cell">1</div></div>
+    <div class="u-flex-horizontal-wrap u-gap-inline-2 sg-demo"><div class="sg-demo-cell">2</div><div class="sg-demo-cell">2</div><div class="sg-demo-cell">2</div></div>
+    <div class="u-flex-horizontal-wrap u-gap-inline-3 sg-demo"><div class="sg-demo-cell">3</div><div class="sg-demo-cell">3</div><div class="sg-demo-cell">3</div></div>
+    <div class="u-flex-horizontal-wrap u-gap-inline-4 sg-demo"><div class="sg-demo-cell">4</div><div class="sg-demo-cell">4</div><div class="sg-demo-cell">4</div></div>
+    <div class="u-flex-horizontal-wrap u-gap-inline-5 sg-demo"><div class="sg-demo-cell">5</div><div class="sg-demo-cell">5</div><div class="sg-demo-cell">5</div></div>
+    <div class="u-flex-horizontal-wrap u-gap-inline-6 sg-demo"><div class="sg-demo-cell">6</div><div class="sg-demo-cell">6</div><div class="sg-demo-cell">6</div></div>
+    <div class="u-flex-horizontal-wrap u-gap-inline-7 sg-demo"><div class="sg-demo-cell">7</div><div class="sg-demo-cell">7</div><div class="sg-demo-cell">7</div></div>
+    <div class="u-flex-horizontal-wrap u-gap-inline-8 sg-demo"><div class="sg-demo-cell">8</div><div class="sg-demo-cell">8</div><div class="sg-demo-cell">8</div></div>
+
+    <h4 class="sg-sub">u-gap-row-* (row gap)</h4>
+    <div class="u-flex-vertical-nowrap u-gap-row-inherit sg-demo"><div class="sg-demo-cell">inherit</div><div class="sg-demo-cell">inherit</div></div>
+    <div class="u-flex-vertical-nowrap u-gap-row-gutter sg-demo"><div class="sg-demo-cell">gutter</div><div class="sg-demo-cell">gutter</div></div>
+    <div class="u-flex-vertical-nowrap u-gap-row-0 sg-demo"><div class="sg-demo-cell">0</div><div class="sg-demo-cell">0</div></div>
+    <div class="u-flex-vertical-nowrap u-gap-row-1 sg-demo"><div class="sg-demo-cell">1</div><div class="sg-demo-cell">1</div></div>
+    <div class="u-flex-vertical-nowrap u-gap-row-2 sg-demo"><div class="sg-demo-cell">2</div><div class="sg-demo-cell">2</div></div>
+    <div class="u-flex-vertical-nowrap u-gap-row-3 sg-demo"><div class="sg-demo-cell">3</div><div class="sg-demo-cell">3</div></div>
+    <div class="u-flex-vertical-nowrap u-gap-row-4 sg-demo"><div class="sg-demo-cell">4</div><div class="sg-demo-cell">4</div></div>
+    <div class="u-flex-vertical-nowrap u-gap-row-5 sg-demo"><div class="sg-demo-cell">5</div><div class="sg-demo-cell">5</div></div>
+    <div class="u-flex-vertical-nowrap u-gap-row-6 sg-demo"><div class="sg-demo-cell">6</div><div class="sg-demo-cell">6</div></div>
+    <div class="u-flex-vertical-nowrap u-gap-row-7 sg-demo"><div class="sg-demo-cell">7</div><div class="sg-demo-cell">7</div></div>
+    <div class="u-flex-vertical-nowrap u-gap-row-8 sg-demo"><div class="sg-demo-cell">8</div><div class="sg-demo-cell">8</div></div>
+
+    <h3 id="section-4c" class="sg-sub">4c. Margin utilities</h3>
+
+    <h4 class="sg-sub">u-margin-top-*</h4>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-gutter">.u-margin-top-gutter</span></div></div>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-text">.u-margin-top-text</span></div></div>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-auto">.u-margin-top-auto</span></div></div>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-0">.u-margin-top-0</span></div></div>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-1">.u-margin-top-1</span></div></div>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-2">.u-margin-top-2</span></div></div>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-3">.u-margin-top-3</span></div></div>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-4">.u-margin-top-4</span></div></div>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-5">.u-margin-top-5</span></div></div>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-6">.u-margin-top-6</span></div></div>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-7">.u-margin-top-7</span></div></div>
+    <div class="sg-demo"><div class="sg-demo-cell--mute sg-demo-cell"><span class="u-margin-top-8">.u-margin-top-8</span></div></div>
+
+    <h4 class="sg-sub">u-margin-bottom-*</h4>
+    <div class="sg-key-row">
+        <span>u-margin-bottom-gutter</span><span>u-margin-bottom-text</span><span>u-margin-bottom-auto</span>
+        <span>u-margin-bottom-0</span><span>u-margin-bottom-1</span><span>u-margin-bottom-2</span>
+        <span>u-margin-bottom-3</span><span>u-margin-bottom-4</span><span>u-margin-bottom-5</span>
+        <span>u-margin-bottom-6</span><span>u-margin-bottom-7</span><span>u-margin-bottom-8</span>
+    </div>
+    <div class="sg-demo">
+        <p class="u-margin-bottom-3">First paragraph with <code class="sg-code">u-margin-bottom-3</code> (16px below).</p>
+        <p class="u-margin-bottom-5">Second with <code class="sg-code">u-margin-bottom-5</code> (32px below).</p>
+        <p class="u-margin-bottom-0">Third with <code class="sg-code">u-margin-bottom-0</code>.</p>
+    </div>
+
+    <h4 class="sg-sub">u-margin-inline-auto, u-margin-trim, u-ignore-trim</h4>
+    <div class="sg-demo u-margin-trim">
+        <div class="u-margin-inline-auto sg-demo-cell sg-maxw-narrow">centered via u-margin-inline-auto</div>
+        <p>First child inside <code class="sg-code">u-margin-trim</code> — top margin stripped.</p>
+        <p>Last child's bottom margin stripped.</p>
+    </div>
+
+    <h3 id="section-4d" class="sg-sub">4d. Padding utilities</h3>
+
+    <h4 class="sg-sub">u-padding-* (all sides)</h4>
+    <div class="u-padding-sitemargin sg-demo sg-demo-tint"><code>u-padding-sitemargin</code></div>
+    <div class="u-padding-gutter sg-demo sg-demo-tint"><code>u-padding-gutter</code></div>
+    <div class="u-padding-0 sg-demo sg-demo-tint"><code>u-padding-0</code></div>
+    <div class="u-padding-1 sg-demo sg-demo-tint"><code>u-padding-1</code></div>
+    <div class="u-padding-2 sg-demo sg-demo-tint"><code>u-padding-2</code></div>
+    <div class="u-padding-3 sg-demo sg-demo-tint"><code>u-padding-3</code></div>
+    <div class="u-padding-4 sg-demo sg-demo-tint"><code>u-padding-4</code></div>
+    <div class="u-padding-5 sg-demo sg-demo-tint"><code>u-padding-5</code></div>
+    <div class="u-padding-6 sg-demo sg-demo-tint"><code>u-padding-6</code></div>
+    <div class="u-padding-7 sg-demo sg-demo-tint"><code>u-padding-7</code></div>
+    <div class="u-padding-8 sg-demo sg-demo-tint"><code>u-padding-8</code></div>
+    <div class="u-padding-small sg-demo sg-demo-tint"><code>u-padding-small</code></div>
+    <div class="u-padding-main sg-demo sg-demo-tint"><code>u-padding-main</code></div>
+    <div class="u-padding-large sg-demo sg-demo-tint"><code>u-padding-large</code></div>
+
+    <h4 class="sg-sub">u-padding-block-* (top + bottom)</h4>
+    <div class="u-padding-block-sitemargin sg-demo sg-demo-tint"><code>u-padding-block-sitemargin</code></div>
+    <div class="u-padding-block-gutter sg-demo sg-demo-tint"><code>u-padding-block-gutter</code></div>
+    <div class="u-padding-block-0 sg-demo sg-demo-tint"><code>u-padding-block-0</code></div>
+    <div class="u-padding-block-1 sg-demo sg-demo-tint"><code>u-padding-block-1</code></div>
+    <div class="u-padding-block-2 sg-demo sg-demo-tint"><code>u-padding-block-2</code></div>
+    <div class="u-padding-block-3 sg-demo sg-demo-tint"><code>u-padding-block-3</code></div>
+    <div class="u-padding-block-4 sg-demo sg-demo-tint"><code>u-padding-block-4</code></div>
+    <div class="u-padding-block-5 sg-demo sg-demo-tint"><code>u-padding-block-5</code></div>
+    <div class="u-padding-block-6 sg-demo sg-demo-tint"><code>u-padding-block-6</code></div>
+    <div class="u-padding-block-7 sg-demo sg-demo-tint"><code>u-padding-block-7</code></div>
+    <div class="u-padding-block-8 sg-demo sg-demo-tint"><code>u-padding-block-8</code></div>
+
+    <h4 class="sg-sub">u-padding-inline-* (left + right)</h4>
+    <div class="u-padding-inline-sitemargin sg-demo sg-demo-tint"><code>u-padding-inline-sitemargin</code></div>
+    <div class="u-padding-inline-gutter sg-demo sg-demo-tint"><code>u-padding-inline-gutter</code></div>
+    <div class="u-padding-inline-0 sg-demo sg-demo-tint"><code>u-padding-inline-0</code></div>
+    <div class="u-padding-inline-1 sg-demo sg-demo-tint"><code>u-padding-inline-1</code></div>
+    <div class="u-padding-inline-2 sg-demo sg-demo-tint"><code>u-padding-inline-2</code></div>
+    <div class="u-padding-inline-3 sg-demo sg-demo-tint"><code>u-padding-inline-3</code></div>
+    <div class="u-padding-inline-4 sg-demo sg-demo-tint"><code>u-padding-inline-4</code></div>
+    <div class="u-padding-inline-5 sg-demo sg-demo-tint"><code>u-padding-inline-5</code></div>
+    <div class="u-padding-inline-6 sg-demo sg-demo-tint"><code>u-padding-inline-6</code></div>
+    <div class="u-padding-inline-7 sg-demo sg-demo-tint"><code>u-padding-inline-7</code></div>
+    <div class="u-padding-inline-8 sg-demo sg-demo-tint"><code>u-padding-inline-8</code></div>
+
+    <h4 class="sg-sub">u-padding-top-* / u-padding-bottom-* / u-padding-left-* / u-padding-right-*</h4>
+    <div class="u-padding-top-small sg-demo sg-demo-tint"><code>u-padding-top-small</code></div>
+    <div class="u-padding-top-main sg-demo sg-demo-tint"><code>u-padding-top-main</code></div>
+    <div class="u-padding-top-large sg-demo sg-demo-tint"><code>u-padding-top-large</code></div>
+    <div class="u-padding-bottom-small sg-demo sg-demo-tint"><code>u-padding-bottom-small</code></div>
+    <div class="u-padding-bottom-main sg-demo sg-demo-tint"><code>u-padding-bottom-main</code></div>
+    <div class="u-padding-bottom-large sg-demo sg-demo-tint"><code>u-padding-bottom-large</code></div>
+    <div class="u-padding-left-1 sg-demo sg-demo-tint"><code>u-padding-left-1</code></div>
+    <div class="u-padding-left-4 sg-demo sg-demo-tint"><code>u-padding-left-4</code></div>
+    <div class="u-padding-right-1 sg-demo sg-demo-tint"><code>u-padding-right-1</code></div>
+    <div class="u-padding-right-4 sg-demo sg-demo-tint"><code>u-padding-right-4</code></div>
+</section>
+
+<!-- ═══════════════════ SECTION 5 — LAYOUT ═══════════════════ -->
+<section id="section-5" class="sg-section">
+    <h2 class="sg-h">5. Layout</h2>
+    <p class="sg-desc">Containers, grids, and flex — the three primitives every page is built from.</p>
+
+    <h3 id="section-5a" class="sg-sub">5a. Containers</h3>
+    <p class="sg-desc">Nested boxes with their max-width labels.</p>
+    <div class="u-container-full sg-demo" data-label-container="full">
+        <div class="sg-demo-cell--mute sg-demo-cell"><code>u-container-full</code> · max-width: 100%</div>
+        <div class="u-container sg-demo" data-label-container="main">
+            <div class="sg-demo-cell--mute sg-demo-cell"><code>u-container</code> · max-width: 90rem (1440px)</div>
+            <div class="u-container-small sg-demo" data-label-container="small">
+                <div class="sg-demo-cell--mute sg-demo-cell"><code>u-container-small</code> · max-width: 50rem (800px)</div>
+            </div>
+        </div>
+    </div>
+
+    <h3 id="section-5b" class="sg-sub">5b. Grid system — live demos</h3>
+    <p class="sg-desc">Every grid type rendered with actual utility classes and colored child cells — no reference tables.</p>
+
+    <h4 class="sg-sub">u-grid-custom — 12-column base grid</h4>
+    <div class="u-grid-custom sg-demo">
+        <div class="u-column-1 sg-demo-cell">1</div>
+        <div class="u-column-1 sg-demo-cell">2</div>
+        <div class="u-column-1 sg-demo-cell">3</div>
+        <div class="u-column-1 sg-demo-cell">4</div>
+        <div class="u-column-1 sg-demo-cell">5</div>
+        <div class="u-column-1 sg-demo-cell">6</div>
+        <div class="u-column-1 sg-demo-cell">7</div>
+        <div class="u-column-1 sg-demo-cell">8</div>
+        <div class="u-column-1 sg-demo-cell">9</div>
+        <div class="u-column-1 sg-demo-cell">10</div>
+        <div class="u-column-1 sg-demo-cell">11</div>
+        <div class="u-column-1 sg-demo-cell">12</div>
+    </div>
+
+    <h4 class="sg-sub">u-grid-autofit — stretches cards to fill row</h4>
+    <div class="u-grid-autofit sg-demo">
+        <div class="sg-demo-cell">autofit 1</div>
+        <div class="sg-demo-cell">autofit 2</div>
+        <div class="sg-demo-cell">autofit 3</div>
+        <div class="sg-demo-cell">autofit 4</div>
+        <div class="sg-demo-cell">autofit 5</div>
+        <div class="sg-demo-cell">autofit 6</div>
+    </div>
+
+    <h4 class="sg-sub">u-grid-autofill — leaves empty slots when cards are fewer</h4>
+    <div class="u-grid-autofill sg-demo">
+        <div class="sg-demo-cell">autofill 1</div>
+        <div class="sg-demo-cell">autofill 2</div>
+        <div class="sg-demo-cell">autofill 3</div>
+        <div class="sg-demo-cell">autofill 4</div>
+        <div class="sg-demo-cell">autofill 5</div>
+        <div class="sg-demo-cell">autofill 6</div>
+    </div>
+
+    <h4 class="sg-sub">u-grid-above — 12-col grid above threshold, flexbox below</h4>
+    <div class="u-grid-above sg-demo">
+        <div class="u-column-4 sg-demo-cell">4-col</div>
+        <div class="u-column-4 sg-demo-cell">4-col</div>
+        <div class="u-column-4 sg-demo-cell">4-col</div>
+    </div>
+
+    <h4 class="sg-sub">u-grid-below — flexbox above threshold, 12-col grid below</h4>
+    <div class="u-grid-below sg-demo">
+        <div class="u-column-6 sg-demo-cell">6-col</div>
+        <div class="u-column-6 sg-demo-cell">6-col</div>
+    </div>
+
+    <h4 class="sg-sub">u-grid-breakout — content + full-bleed columns</h4>
+    <div class="u-grid-breakout sg-demo">
+        <div class="u-column-full sg-demo-cell sg-demo-cell--alt">u-column-full (breaks out to edges)</div>
+        <div class="u-column-6 sg-demo-cell">u-column-6 (within content)</div>
+        <div class="u-column-6 sg-demo-cell">u-column-6 (within content)</div>
+    </div>
+
+    <h4 class="sg-sub">u-grid-subgrid — inherits parent grid lines</h4>
+    <div class="u-grid-custom sg-demo">
+        <div class="u-column-6 u-grid-subgrid sg-demo">
+            <div class="sg-demo-cell">subgrid child A</div>
+            <div class="sg-demo-cell">subgrid child B</div>
+        </div>
+        <div class="u-column-6 sg-demo-cell">sibling u-column-6</div>
+    </div>
+
+    <h4 class="sg-sub">Column-spanning utilities</h4>
+    <div class="u-grid-custom sg-demo"><div class="u-column-full sg-demo-cell">u-column-full</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-indent sg-demo-cell">u-column-indent</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-1 sg-demo-cell">u-column-1</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-2 sg-demo-cell">u-column-2</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-3 sg-demo-cell">u-column-3</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-4 sg-demo-cell">u-column-4</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-5 sg-demo-cell">u-column-5</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-6 sg-demo-cell">u-column-6</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-7 sg-demo-cell">u-column-7</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-8 sg-demo-cell">u-column-8</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-9 sg-demo-cell">u-column-9</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-10 sg-demo-cell">u-column-10</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-11 sg-demo-cell">u-column-11</div></div>
+    <div class="u-grid-custom sg-demo"><div class="u-column-12 sg-demo-cell">u-column-12</div></div>
+
+    <h4 class="sg-sub">Column-start utilities (example: starting at col 5)</h4>
+    <div class="u-grid-custom sg-demo"><div class="u-column-4 u-column-start-5 sg-demo-cell">u-column-start-5 + u-column-4</div></div>
+
+    <h3 id="section-5c" class="sg-sub">5c. Flexbox — live demos</h3>
+
+    <h4 class="sg-sub">Display modes</h4>
+    <div class="u-flex-horizontal-wrap sg-demo"><div class="sg-demo-cell">u-flex-horizontal-wrap 1</div><div class="sg-demo-cell">2</div><div class="sg-demo-cell">3</div></div>
+    <div class="u-flex-horizontal-nowrap sg-demo"><div class="sg-demo-cell">u-flex-horizontal-nowrap 1</div><div class="sg-demo-cell">2</div><div class="sg-demo-cell">3</div></div>
+    <div class="u-flex-vertical-wrap sg-demo"><div class="sg-demo-cell">u-flex-vertical-wrap 1</div><div class="sg-demo-cell">2</div><div class="sg-demo-cell">3</div></div>
+    <div class="u-flex-vertical-nowrap sg-demo"><div class="sg-demo-cell">u-flex-vertical-nowrap 1</div><div class="sg-demo-cell">2</div><div class="sg-demo-cell">3</div></div>
+
+    <h4 class="sg-sub">u-align-items-* (horizontal flex, cross-axis = vertical)</h4>
+    <div class="u-flex-horizontal-nowrap u-align-items-variable sg-demo sg-flex-demo"><div class="sg-demo-cell">variable</div><div class="sg-demo-cell sg-minh-sm">taller</div></div>
+    <div class="u-flex-horizontal-nowrap u-align-items-start sg-demo sg-flex-demo"><div class="sg-demo-cell">start</div><div class="sg-demo-cell sg-minh-sm">taller</div></div>
+    <div class="u-flex-horizontal-nowrap u-align-items-center sg-demo sg-flex-demo"><div class="sg-demo-cell">center</div><div class="sg-demo-cell sg-minh-sm">taller</div></div>
+    <div class="u-flex-horizontal-nowrap u-align-items-end sg-demo sg-flex-demo"><div class="sg-demo-cell">end</div><div class="sg-demo-cell sg-minh-sm">taller</div></div>
+    <div class="u-flex-horizontal-nowrap u-align-items-stretch sg-demo sg-flex-demo"><div class="sg-demo-cell">stretch</div><div class="sg-demo-cell sg-minh-sm">taller</div></div>
+
+    <h4 class="sg-sub">u-justify-content-*</h4>
+    <div class="u-flex-horizontal-nowrap u-justify-content-variable sg-demo sg-flex-demo"><div class="sg-demo-cell">variable</div><div class="sg-demo-cell">B</div></div>
+    <div class="u-flex-horizontal-nowrap u-justify-content-start sg-demo sg-flex-demo"><div class="sg-demo-cell">start</div><div class="sg-demo-cell">B</div></div>
+    <div class="u-flex-horizontal-nowrap u-justify-content-center sg-demo sg-flex-demo"><div class="sg-demo-cell">center</div><div class="sg-demo-cell">B</div></div>
+    <div class="u-flex-horizontal-nowrap u-justify-content-end sg-demo sg-flex-demo"><div class="sg-demo-cell">end</div><div class="sg-demo-cell">B</div></div>
+    <div class="u-flex-horizontal-nowrap u-justify-content-between sg-demo sg-flex-demo"><div class="sg-demo-cell">between</div><div class="sg-demo-cell">B</div></div>
+    <div class="u-flex-horizontal-nowrap u-justify-content-around sg-demo sg-flex-demo"><div class="sg-demo-cell">around</div><div class="sg-demo-cell">B</div></div>
+
+    <h4 class="sg-sub">u-align-self-* (child of horizontal flex)</h4>
+    <div class="u-flex-horizontal-nowrap u-align-items-start sg-demo sg-flex-demo sg-minh-md">
+        <div class="u-align-self-variable sg-demo-cell">variable</div>
+        <div class="u-align-self-start sg-demo-cell">start</div>
+        <div class="u-align-self-center sg-demo-cell">center</div>
+        <div class="u-align-self-end sg-demo-cell">end</div>
+        <div class="u-align-self-stretch sg-demo-cell">stretch</div>
+    </div>
+
+    <h4 class="sg-sub">Flex sizing — u-flex-grow, u-flex-shrink, u-flex-noshrink</h4>
+    <div class="u-flex-horizontal-nowrap sg-demo sg-flex-demo">
+        <div class="u-flex-grow sg-demo-cell">u-flex-grow (takes extra space)</div>
+        <div class="u-flex-noshrink sg-demo-cell">u-flex-noshrink</div>
+    </div>
+    <div class="u-flex-horizontal-nowrap sg-demo sg-flex-demo">
+        <div class="u-flex-shrink sg-demo-cell">u-flex-shrink</div>
+        <div class="u-flex-shrink sg-demo-cell">u-flex-shrink</div>
+    </div>
+
+    <h4 class="sg-sub">Order utilities</h4>
+    <div class="u-flex-horizontal-nowrap sg-demo sg-flex-demo">
+        <div class="sg-demo-cell">natural A</div>
+        <div class="u-order-last sg-demo-cell">u-order-last (renders last)</div>
+        <div class="u-order-first sg-demo-cell">u-order-first (renders first)</div>
+        <div class="sg-demo-cell">natural D</div>
+    </div>
+
+    <h4 class="sg-sub">Alignment modes — u-alignment-start / center / end</h4>
+    <div class="u-alignment-start u-flex-vertical-nowrap sg-demo">
+        <p>u-alignment-start — drives child text-align + flex alignment from one place.</p>
+        <div class="sg-demo-cell">child</div>
+    </div>
+    <div class="u-alignment-center u-flex-vertical-nowrap sg-demo">
+        <p>u-alignment-center — center-aligned children via the shared alignment mode.</p>
+        <div class="sg-demo-cell">child</div>
+    </div>
+    <div class="u-alignment-end u-flex-vertical-nowrap sg-demo">
+        <p>u-alignment-end — end-aligned children via the shared alignment mode.</p>
+        <div class="sg-demo-cell">child</div>
+    </div>
+</section>
+
+<!-- ═══════════════════ SECTION 6 — SIZING & VISIBILITY ═══════════════════ -->
+<section id="section-6" class="sg-section">
+    <h2 class="sg-h">6. Sizing & Visibility</h2>
+
+    <h3 class="sg-sub">6a. Width / Height / Object-fit</h3>
+    <div class="u-width-full sg-demo sg-demo-cell">u-width-full</div>
+    <div class="sg-demo sg-h-lg"><div class="u-height-full sg-demo-cell">u-height-full</div></div>
+    <div class="u-min-height-screen sg-demo sg-demo-tint sg-h-xl u-overflow-hidden">u-min-height-screen (clipped in preview)</div>
+    <div class="sg-cols-2">
+        <div class="sg-demo"><p><code class="sg-code">u-object-fit-cover</code></p><img src="assets/logos/munich-vertical--density.svg" alt="" class="u-object-fit-cover u-width-full sg-img-h"></div>
+        <div class="sg-demo"><p><code class="sg-code">u-object-fit-contain</code></p><img src="assets/logos/munich-vertical--density.svg" alt="" class="u-object-fit-contain u-width-full sg-img-h"></div>
+    </div>
+
+    <h3 class="sg-sub">6b. Aspect ratios</h3>
+    <div class="sg-cols-3">
+        <div class="u-ratio-1 sg-demo-cell sg-center-grid">u-ratio-1 (1:1)</div>
+        <div class="u-ratio-16-9 sg-demo-cell sg-center-grid">u-ratio-16-9</div>
+        <div class="u-ratio-3-1 sg-demo-cell sg-center-grid">u-ratio-3-1</div>
+    </div>
+    <div class="sg-cols-3">
+        <div class="u-ratio-2-3 sg-demo-cell sg-center-grid">u-ratio-2-3</div>
+        <div class="u-ratio-2-1 sg-demo-cell sg-center-grid">u-ratio-2-1</div>
+        <div class="u-ratio-5-4 sg-demo-cell sg-center-grid">u-ratio-5-4</div>
+    </div>
+    <div class="sg-cols-3">
+        <div class="u-ratio-4-5 sg-demo-cell sg-center-grid">u-ratio-4-5</div>
+        <div class="sg-demo-cell sg-center-grid sg-ratio-21-9">u-ratio-21-9 (cinematic)</div>
+        <div class="sg-demo-cell sg-center-grid sg-ratio-9-16">u-ratio-9-16 (story)</div>
+    </div>
+    <p class="sg-desc">Same <code class="sg-code">u-ratio-1</code> class, three different widths — demonstrating the ratio holds regardless of container size:</p>
+    <div class="sg-cols-3">
+        <div class="u-ratio-1 sg-demo-cell sg-center-grid">u-ratio-1 · small</div>
+        <div class="u-ratio-1 sg-demo-cell sg-center-grid">u-ratio-1 · medium</div>
+        <div class="u-ratio-1 sg-demo-cell sg-center-grid">u-ratio-1 · large</div>
+    </div>
+    <div class="sg-cols-2">
+        <div class="u-ratio-16-9 sg-demo-cell sg-center-grid">u-ratio-16-9 · poster</div>
+        <div class="u-ratio-4-5 sg-demo-cell sg-center-grid">u-ratio-4-5 · instagram</div>
+    </div>
+
+    <h3 class="sg-sub">6c. Position & z-index</h3>
+    <div class="sg-key-row">
+        <span>u-position-static</span><span>u-position-relative</span><span>u-position-absolute</span>
+        <span>u-position-sticky</span><span>u-position-fixed</span>
+    </div>
+    <div class="u-position-relative sg-demo sg-h-xl">
+        <div class="u-position-absolute sg-demo-cell sg-pinned-tl">u-position-absolute (top-left)</div>
+        <div class="u-position-absolute sg-demo-cell sg-demo-cell--alt sg-pinned-br">u-position-absolute (bottom-right)</div>
+    </div>
+    <div class="sg-key-row">
+        <span>u-zindex-negative</span><span>u-zindex-unset</span><span>u-zindex-0</span>
+        <span>u-zindex-1</span><span>u-zindex-2</span><span>u-zindex-3</span>
+    </div>
+
+    <h3 class="sg-sub">6d. Overflow</h3>
+    <div class="u-overflow-visible sg-demo sg-h-sm">u-overflow-visible</div>
+    <div class="u-overflow-hidden sg-demo sg-h-sm">u-overflow-hidden — lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
+    <div class="u-overflow-clip sg-demo sg-h-sm">u-overflow-clip — lorem ipsum dolor sit amet consectetur</div>
+    <div class="u-overflow-x-auto sg-demo sg-nowrap">u-overflow-x-auto — a very long single line that forces horizontal scrolling because the container is narrower than the content, demonstrating horizontal overflow behavior</div>
+    <div class="u-overflow-y-auto sg-demo sg-h-md">u-overflow-y-auto — paragraph one. paragraph two. paragraph three. paragraph four. paragraph five. paragraph six.</div>
+
+    <h3 class="sg-sub">6e. Cover patterns</h3>
+    <div class="u-position-relative sg-demo sg-h-xl">
+        <div class="u-cover-absolute sg-demo-tint"><code>u-cover-absolute</code></div>
+    </div>
+    <div class="sg-demo sg-h-xl">
+        <div class="u-cover sg-demo-tint"><code>u-cover (relative)</code></div>
+    </div>
+
+    <h3 class="sg-sub">6f. Display utilities</h3>
+    <div class="sg-demo">
+        <div class="u-display-contents">
+            <p><code class="sg-code">u-display-contents</code> — the wrapper vanishes from the box tree; children act as if they're direct children of the parent.</p>
+        </div>
+        <div class="u-hide-if-empty">
+            <p>u-hide-if-empty — this div is visible because it has content. Same class on an empty div hides it.</p>
+        </div>
+    </div>
+
+    <h3 class="sg-sub">6g. Pointer events</h3>
+    <div class="sg-cols-2">
+        <div class="u-pointer-on sg-demo sg-demo-cell">u-pointer-on — clickable</div>
+        <div class="u-pointer-off sg-demo sg-demo-cell">u-pointer-off — visual only</div>
+    </div>
+
+    <h3 class="sg-sub">6h. Border radius</h3>
+    <div class="sg-cols-3">
+        <div class="u-radius-none sg-demo sg-demo-cell">u-radius-none</div>
+        <div class="u-radius-inherit sg-demo sg-demo-cell">u-radius-inherit</div>
+        <div class="u-radius-small sg-demo sg-demo-cell">u-radius-small (6px)</div>
+    </div>
+    <div class="sg-cols-2">
+        <div class="u-radius-main sg-demo sg-demo-cell">u-radius-main (8px)</div>
+        <div class="u-radius-round sg-demo sg-demo-cell sg-square-lg">u-radius-round</div>
+    </div>
+</section>
+
+<!-- ═══════════════════ SECTION 7 — COMPONENTS ═══════════════════ -->
+<section id="section-7" class="sg-section">
+    <h2 class="sg-h">7. Components</h2>
+
+    <h3 id="section-7a" class="sg-sub">7a. Buttons — LUMOS 3-layer structure</h3>
+    <p class="sg-desc">Non-negotiable: <code class="sg-code">button_main_wrap &gt; clickable_wrap + button_main_element &gt; button_main_text</code>. Variants via <code class="sg-code">data-wf--button-main--variant</code>. Hover state via <code class="sg-code">data-trigger="hover focus"</code>.</p>
+
+    <div class="sg-demo">
+        <h4 class="sg-sub">Primary</h4>
+        <div data-wf--button-main--variant="primary" class="button_main_wrap" data-button=" " data-trigger="hover focus">
+            <div data-wf--clickable--variant="focus-ring-outside" class="clickable_wrap u-cover-absolute">
+                <button type="button" aria-label="Klassen buchen" class="clickable_btn"></button>
+            </div>
+            <a href="#" class="button_main_element w-inline-block">
+                <div class="button_main_text u-text-style-main">Klassen buchen</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="sg-demo">
+        <h4 class="sg-sub">Secondary</h4>
+        <div data-wf--button-main--variant="secondary" class="button_main_wrap" data-button=" " data-trigger="hover focus">
+            <div data-wf--clickable--variant="focus-ring-outside" class="clickable_wrap u-cover-absolute">
+                <button type="button" aria-label="Mehr erfahren" class="clickable_btn"></button>
+            </div>
+            <a href="#" class="button_main_element w-inline-block">
+                <div class="button_main_text u-text-style-main">Mehr erfahren</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="sg-demo">
+        <h4 class="sg-sub">Pair in u-button-group</h4>
+        <div class="u-button-group">
+            <div data-wf--button-main--variant="primary" class="button_main_wrap" data-button=" " data-trigger="hover focus">
+                <div data-wf--clickable--variant="focus-ring-outside" class="clickable_wrap u-cover-absolute">
+                    <button type="button" aria-label="Jetzt starten" class="clickable_btn"></button>
+                </div>
+                <a href="#" class="button_main_element w-inline-block">
+                    <div class="button_main_text u-text-style-main">Jetzt starten</div>
+                </a>
+            </div>
+            <div data-wf--button-main--variant="secondary" class="button_main_wrap" data-button=" " data-trigger="hover focus">
+                <div data-wf--clickable--variant="focus-ring-outside" class="clickable_wrap u-cover-absolute">
+                    <button type="button" aria-label="Stundenplan ansehen" class="clickable_btn"></button>
+                </div>
+                <a href="#" class="button_main_element w-inline-block">
+                    <div class="button_main_text u-text-style-main">Stundenplan ansehen</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h3 id="section-7b" class="sg-sub">7b. Image wrappers — all 11 aspect ratios</h3>
+    <p class="sg-desc">Wrapper provides aspect-ratio container; <code class="sg-code">image-wrap__img--cover</code> makes the image fill-and-crop.</p>
+
+    <div class="sg-cols-3">
+        <div>
+            <div class="image-wrap image-wrap--square"><img src="assets/logos/munich-full-left--silk.svg" alt="" class="image-wrap__img image-wrap__img--cover"></div>
+            <p><code class="sg-code">image-wrap--square</code> 1:1</p>
+        </div>
+        <div>
+            <div class="image-wrap image-wrap--landscape"><img src="assets/logos/munich-vertical--density.svg" alt="" class="image-wrap__img image-wrap__img--cover"></div>
+            <p><code class="sg-code">image-wrap--landscape</code> 16:9</p>
+        </div>
+        <div>
+            <div class="image-wrap image-wrap--landscape-classic"><img src="assets/logos/munich-vertical--density.svg" alt="" class="image-wrap__img image-wrap__img--cover"></div>
+            <p><code class="sg-code">image-wrap--landscape-classic</code> 4:3</p>
+        </div>
+    </div>
+    <div class="sg-cols-3">
+        <div>
+            <div class="image-wrap image-wrap--landscape-photo"><img src="assets/logos/munich-vertical--density.svg" alt="" class="image-wrap__img image-wrap__img--cover"></div>
+            <p><code class="sg-code">image-wrap--landscape-photo</code> 3:2</p>
+        </div>
+        <div>
+            <div class="image-wrap image-wrap--landscape-wide"><img src="assets/logos/munich-vertical--density.svg" alt="" class="image-wrap__img image-wrap__img--cover"></div>
+            <p><code class="sg-code">image-wrap--landscape-wide</code> 2:1</p>
+        </div>
+        <div>
+            <div class="image-wrap image-wrap--landscape-ultrawide"><img src="assets/logos/munich-vertical--density.svg" alt="" class="image-wrap__img image-wrap__img--cover"></div>
+            <p><code class="sg-code">image-wrap--landscape-ultrawide</code> 21:9</p>
+        </div>
+    </div>
+    <div class="sg-cols-3">
+        <div>
+            <div class="image-wrap image-wrap--portrait"><img src="assets/logos/munich-full-left--silk.svg" alt="" class="image-wrap__img image-wrap__img--cover"></div>
+            <p><code class="sg-code">image-wrap--portrait</code> 2:3</p>
+        </div>
+        <div>
+            <div class="image-wrap image-wrap--portrait-tall"><img src="assets/logos/munich-full-left--silk.svg" alt="" class="image-wrap__img image-wrap__img--cover"></div>
+            <p><code class="sg-code">image-wrap--portrait-tall</code> 4:5</p>
+        </div>
+        <div>
+            <div class="image-wrap image-wrap--portrait-story"><img src="assets/logos/munich-full-left--silk.svg" alt="" class="image-wrap__img image-wrap__img--cover"></div>
+            <p><code class="sg-code">image-wrap--portrait-story</code> 9:16</p>
+        </div>
+    </div>
+    <div class="sg-cols-2">
+        <div>
+            <div class="image-wrap image-wrap--circle sg-maxw-circle"><img src="assets/logos/munich-full-left--silk.svg" alt="" class="image-wrap__img image-wrap__img--cover"></div>
+            <p><code class="sg-code">image-wrap--circle</code> — 1:1 with round radius</p>
+        </div>
+        <div>
+            <div class="image-wrap image-wrap--freeform sg-maxh-freeform"><img src="assets/logos/munich-vertical--density.svg" alt="" class="image-wrap__img image-wrap__img--cover"></div>
+            <p><code class="sg-code">image-wrap--freeform</code> — fills container height</p>
+        </div>
+    </div>
+
+    <h3 id="section-7c" class="sg-sub">7c. Clickable pattern</h3>
+    <p class="sg-desc">Makes an entire card clickable without nesting links. <code class="sg-code">u-sr-only</code> gives the link accessible text.</p>
+    <div class="u-position-relative sg-demo">
+        <h4 class="sg-no-mt">Das Team — Meet our teachers</h4>
+        <p>Jessina, Anne Lotte, Manuela (co-founder), Nadine and more — teaching Vinyasa, Yin, Kundalini, Bhakti, Pranayama, Ahimsa, Dhyana and Nada.</p>
+        <div class="clickable_wrap u-cover-absolute">
+            <a class="clickable_link" href="#">
+                <span class="clickable_text u-sr-only">View all teachers</span>
+            </a>
+        </div>
+    </div>
+
+    <h3 id="section-7d" class="sg-sub">7d. Close button</h3>
+    <div class="sg-demo">
+        <div data-wf--button-close--variant="primary-medium" data-modal-close=" " class="button_close_wrap" data-button=" " data-trigger="hover focus">
+            <div class="button_close_element">
+                <svg class="button_close_icon u-svg" viewBox="0 0 16 16" aria-hidden="true">
+                    <path class="u-path" d="M2 2 L14 14 M14 2 L2 14" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke" />
+                </svg>
+            </div>
+            <div data-wf--clickable--variant="focus-ring-outside" class="clickable_wrap u-cover-absolute">
+                <button type="button" aria-label="Close" class="clickable_btn"></button>
+            </div>
+        </div>
+    </div>
+
+    <h3 id="section-7e" class="sg-sub">7e. Navigation</h3>
+    <p class="sg-desc">Munich site nav. German-first, with schedule split across Lehel and Glockenbach studios.</p>
+    <div class="sg-demo">
+        <nav class="u-flex-horizontal-wrap u-justify-content-between u-align-items-center u-padding-inline-4 u-padding-block-3" aria-label="Main">
+            <a href="/"><img src="assets/logos/munich-vertical--density.svg" alt="Jivamukti München" class="sg-logo-h"></a>
+            <ul class="u-flex-horizontal-wrap u-gap-inline-4 u-align-items-center sg-list-reset">
+                <li><a href="/stundenplan-lehel">Stundenplan Lehel</a></li>
+                <li><a href="/stundenplan-glockenbach">Stundenplan Glockenbach</a></li>
+                <li><a href="/unsere-studios">Studios</a></li>
+                <li><a href="/das-team">Team</a></li>
+                <li><a href="/stunden-stile">Klassen-Stile</a></li>
+                <li><a href="/preise">Preise</a></li>
+                <li><a href="/retreats">Retreats</a></li>
+                <li><a href="/75h-teacher-training">75HR Training</a></li>
+            </ul>
+            <div data-wf--button-main--variant="primary" class="button_main_wrap" data-button=" " data-trigger="hover focus">
+                <div data-wf--clickable--variant="focus-ring-outside" class="clickable_wrap u-cover-absolute">
+                    <button type="button" aria-label="Klassen buchen" class="clickable_btn"></button>
+                </div>
+                <a href="#" class="button_main_element w-inline-block">
+                    <div class="button_main_text u-text-style-main">Klassen buchen</div>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <h3 id="section-7f" class="sg-sub">7f. Modal</h3>
+    <p class="sg-desc">Dialog with <code class="sg-code">data-modal-target</code> / <code class="sg-code">data-modal-close</code> attributes. JS wiring lives in <code class="sg-code">js/main.js</code>.</p>
+    <div class="sg-demo">
+        <div data-wf--button-main--variant="primary" data-modal-trigger="signup-modal" class="button_main_wrap" data-button=" " data-trigger="hover focus">
+            <div data-wf--clickable--variant="focus-ring-outside" class="clickable_wrap u-cover-absolute">
+                <button type="button" aria-label="Open newsletter signup" class="clickable_btn"></button>
+            </div>
+            <a href="#" class="button_main_element w-inline-block">
+                <div class="button_main_text u-text-style-main">Newsletter abonnieren</div>
+            </a>
+        </div>
+        <dialog id="signup-modal" data-modal-target="signup-modal" class="u-padding-5 u-radius-main sg-modal">
+            <h4 class="sg-no-mt">Bleib auf dem Laufenden</h4>
+            <p>Monatliche Updates zu neuen Klassen, Retreats und Events.</p>
+            <div data-wf--button-close--variant="primary-medium" data-modal-close="signup-modal" class="button_close_wrap" data-button=" " data-trigger="hover focus">
+                <div class="button_close_element">
+                    <svg class="button_close_icon u-svg" viewBox="0 0 16 16" aria-hidden="true">
+                        <path class="u-path" d="M2 2 L14 14 M14 2 L2 14" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke" />
+                    </svg>
+                </div>
+            </div>
+        </dialog>
+    </div>
+</section>
+
+<!-- ═══════════════════ SECTION 8 — STATE & TRIGGER ═══════════════════ -->
+<section id="section-8" class="sg-section">
+    <h2 class="sg-h">8. State & Trigger system</h2>
+    <p class="sg-desc">LUMOS uses <code class="sg-code">data-state</code> and <code class="sg-code">data-trigger</code> to drive CSS without JS. Two CSS variables — <code class="sg-code">--_state---true</code> and <code class="sg-code">--_trigger---on</code> — flip between 0 and 1 on condition, so any property can be computed with <code class="sg-code">calc()</code>.</p>
+
+    <h3 class="sg-sub">8a. States</h3>
+    <table class="sg-table">
+        <tr><th>Attribute</th><th>Value</th><th>Becomes active when</th></tr>
+        <tr><td><code>data-state</code></td><td><code>checked</code></td><td>element or descendant has a checked input</td></tr>
+        <tr><td><code>data-state</code></td><td><code>current</code></td><td>element or descendant has <code>.w--current</code> (current-page link)</td></tr>
+        <tr><td><code>data-state</code></td><td><code>open</code></td><td>element or descendant has <code>.w--open</code> (dropdown/menu)</td></tr>
+        <tr><td><code>data-state</code></td><td><code>expanded</code></td><td>element or descendant has <code>aria-expanded="true"</code></td></tr>
+        <tr><td><code>data-state</code></td><td><code>external</code></td><td>element or descendant is <code>target="_blank"</code></td></tr>
+        <tr><td><code>data-state</code></td><td><code>pressed</code></td><td>element or descendant has <code>aria-pressed="true"</code></td></tr>
+        <tr><td>class</td><td><code>is-active</code></td><td>combo class applied directly</td></tr>
+    </table>
+
+    <div class="sg-demo">
+        <h4 class="sg-sub">Live: <code class="sg-code">data-state="expanded"</code></h4>
+        <button type="button" aria-expanded="true" data-state="expanded" class="u-padding-3 u-radius-small sg-state-btn">aria-expanded=true → saffron background</button>
+        <button type="button" aria-expanded="false" data-state="expanded" class="u-padding-3 u-radius-small sg-state-btn">aria-expanded=false → neutral</button>
+    </div>
+
+    <h3 class="sg-sub">8b. Triggers</h3>
+    <table class="sg-table">
+        <tr><th>Attribute</th><th>Value</th><th>Becomes active while</th></tr>
+        <tr><td><code>data-trigger</code></td><td><code>hover</code></td><td>element is hovered</td></tr>
+        <tr><td><code>data-trigger</code></td><td><code>focus</code></td><td>element or descendant is focused</td></tr>
+        <tr><td><code>data-trigger</code></td><td><code>mobile</code></td><td>touch device</td></tr>
+        <tr><td><code>data-trigger</code></td><td><code>preview</code></td><td>inside Webflow designer preview</td></tr>
+        <tr><td><code>data-trigger</code></td><td><code>group</code></td><td>parent — affects sibling elements</td></tr>
+    </table>
+
+    <div class="sg-demo">
+        <h4 class="sg-sub">Live: <code class="sg-code">data-trigger="hover focus"</code> — hover the button below</h4>
+        <div data-wf--button-main--variant="primary" class="button_main_wrap" data-button=" " data-trigger="hover focus">
+            <div data-wf--clickable--variant="focus-ring-outside" class="clickable_wrap u-cover-absolute">
+                <button type="button" aria-label="Hover me" class="clickable_btn"></button>
+            </div>
+            <a href="#" class="button_main_element w-inline-block">
+                <div class="button_main_text u-text-style-main">Hover me — background flips on hover</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ SECTION 9 — ACCESSIBILITY ═══════════════════ -->
+<section id="section-9" class="sg-section">
+    <h2 class="sg-h">9. Accessibility</h2>
+
+    <h3 class="sg-sub"><code>u-sr-only</code> — screen-reader-only text</h3>
+    <div class="sg-demo">
+        <a href="/stundenplan-lehel">
+            Stundenplan<span class="u-sr-only"> für Studio Lehel</span>
+        </a>
+        <p><code class="sg-code">u-sr-only</code> is visually hidden but read aloud — used to disambiguate links like "Read more" or "View schedule".</p>
+    </div>
+
+    <h3 class="sg-sub">Focus states</h3>
+    <div class="sg-demo">
+        <p>Focus-ring color comes from <code class="sg-code">--_theme---text</code>, width from <code class="sg-code">--focus--width</code>. Tab through these:</p>
+        <a href="#" class="u-margin-right-3">Link one</a>
+        <a href="#" class="u-margin-right-3">Link two</a>
+        <button type="button" class="u-padding-2 u-radius-small">Button</button>
+    </div>
+
+    <h3 class="sg-sub">Semantic landmarks & skip link</h3>
+    <div class="sg-demo">
+        <pre class="sg-code sg-code-block"><code>&lt;a href="#main" class="u-sr-only"&gt;Skip to main content&lt;/a&gt;
+&lt;nav aria-label="Main"&gt;…&lt;/nav&gt;
+&lt;main id="main"&gt;…&lt;/main&gt;
+&lt;footer&gt;…&lt;/footer&gt;</code></pre>
+    </div>
+
+    <h3 class="sg-sub">aria-label pattern</h3>
+    <div class="sg-demo">
+        <button type="button" aria-label="Close newsletter signup" class="u-padding-2 u-radius-round sg-close-round">✕</button>
+        <p><code class="sg-code">aria-label</code> makes icon-only buttons readable by screen readers.</p>
+    </div>
+</section>
+
+<!-- ═══════════════════ SECTION 10 — BREAKPOINTLESS ═══════════════════ -->
+<section id="section-10" class="sg-section">
+    <h2 class="sg-h">10. Breakpointless / Responsive</h2>
+    <p class="sg-desc">LUMOS prefers container queries + fluid <code class="sg-code">clamp()</code> over media queries. Webflow fallback breakpoints still exist for edge cases.</p>
+
+    <h3 class="sg-sub">Techniques</h3>
+    <table class="sg-table">
+        <tr><th>Utility</th><th>What it does</th></tr>
+        <tr><td><code>u-grid-autofit</code></td><td>Columns expand to fill; no breakpoints needed</td></tr>
+        <tr><td><code>u-grid-autofill</code></td><td>Columns stay at min width; empty slots left behind</td></tr>
+        <tr><td><code>u-flex-horizontal-wrap</code></td><td>Row wraps naturally as content grows</td></tr>
+        <tr><td><code>u-threshold-large</code></td><td>Container query threshold — triggers reflow above 90rem</td></tr>
+        <tr><td><code>u-threshold-medium</code></td><td>Container query threshold — reflow above 60rem</td></tr>
+        <tr><td><code>u-threshold-small</code></td><td>Container query threshold — reflow above 30rem</td></tr>
+        <tr><td><code>u-grid-above</code></td><td>12-col grid above threshold, flex below</td></tr>
+        <tr><td><code>u-grid-below</code></td><td>Flex above, 12-col grid below</td></tr>
+        <tr><td><code>u-all-unset-above</code></td><td>Resets all utilities above threshold</td></tr>
+        <tr><td><code>u-all-unset-below</code></td><td>Resets all utilities below threshold</td></tr>
+        <tr><td><code>u-order-unset-above</code></td><td>Resets order above threshold</td></tr>
+        <tr><td><code>u-order-unset-below</code></td><td>Resets order below threshold</td></tr>
+        <tr><td><code>clamp()</code></td><td>Fluid values for sizes, spacing, typography — scales between 20rem and 90rem viewport</td></tr>
+    </table>
+
+    <h3 class="sg-sub">Webflow fallback breakpoints</h3>
+    <table class="sg-table">
+        <tr><th>Name</th><th>Query</th><th>Webflow key</th></tr>
+        <tr><td>Tablet</td><td><code>@media (max-width: 991px)</code></td><td><code>medium</code></td></tr>
+        <tr><td>Mobile landscape</td><td><code>@media (max-width: 767px)</code></td><td><code>small</code></td></tr>
+        <tr><td>Mobile portrait</td><td><code>@media (max-width: 478px)</code></td><td><code>tiny</code></td></tr>
+    </table>
+    <p class="sg-desc">Rule: use <code class="sg-code">max-width</code> only, desktop-first. Never <code class="sg-code">min-width</code>; never <code class="sg-code">@container</code> queries in <code class="sg-code">styleLess</code> (they crash Webflow paste).</p>
+
+    <h3 class="sg-sub">Live demo — resize this page to see responsiveness without media queries</h3>
+    <p class="sg-desc">The grid below uses <code class="sg-code">u-grid-autofit</code>. As the viewport narrows, it reflows automatically — no breakpoints involved.</p>
+    <div class="u-grid-autofit u-gap-inline-4 sg-demo">
+        <div class="sg-demo-cell">Vinyasa</div>
+        <div class="sg-demo-cell">Yin</div>
+        <div class="sg-demo-cell">Kundalini</div>
+        <div class="sg-demo-cell">Bhakti</div>
+        <div class="sg-demo-cell">Pranayama</div>
+        <div class="sg-demo-cell">Ahimsa</div>
+        <div class="sg-demo-cell">Dhyana</div>
+        <div class="sg-demo-cell">Nada</div>
+    </div>
+
+    <p class="sg-desc">Same content using <code class="sg-code">u-flex-horizontal-wrap</code> — wraps naturally as the row fills up:</p>
+    <div class="u-flex-horizontal-wrap u-gap-inline-3 u-gap-row-3 sg-demo">
+        <div class="sg-demo-cell">Mondays · Lehel</div>
+        <div class="sg-demo-cell">Tuesdays · Glockenbach</div>
+        <div class="sg-demo-cell">Wednesdays · Lehel</div>
+        <div class="sg-demo-cell">Thursdays · Glockenbach</div>
+        <div class="sg-demo-cell">Fridays · Lehel</div>
+        <div class="sg-demo-cell">Saturdays · Glockenbach</div>
+        <div class="sg-demo-cell">Sundays · Both studios</div>
+    </div>
+
+    <h3 class="sg-sub">When to reach for a media-query override anyway</h3>
+    <ul>
+        <li>A component needs to fundamentally <strong>change structure</strong> on small screens (hamburger nav replacing horizontal links).</li>
+        <li>A specific <strong>typography trim</strong> only looks right above a certain width.</li>
+        <li>An <strong>image art direction</strong> swap — a horizontal hero image on desktop, a vertical one on mobile.</li>
+    </ul>
+    <p class="sg-desc">In every other case, prefer <code class="sg-code">u-grid-autofit</code>, <code class="sg-code">u-flex-horizontal-wrap</code>, or fluid <code class="sg-code">clamp()</code> values.</p>
+</section>
+
+<!-- ═══════════════════ SECTION 11 — SVG & ICONS ═══════════════════ -->
+<section id="section-11" class="sg-section">
+    <h2 class="sg-h">11. SVG & Icons</h2>
+    <p class="sg-desc"><code class="sg-code">u-svg</code> + <code class="sg-code">u-path</code> keep icons colour-synchronised with theme. Use <code class="sg-code">vector-effect="non-scaling-stroke"</code> so stroke widths don't distort when icons scale.</p>
+
+    <div class="sg-cols-3">
+        <div class="sg-demo sg-centered">
+            <svg class="u-svg sg-icon" viewBox="0 0 24 24">
+                <path class="u-path" d="M12 2 L2 22 L22 22 Z" fill="currentColor" />
+            </svg>
+            <p><code class="sg-code">u-svg + u-path (fill)</code></p>
+        </div>
+        <div class="sg-demo sg-centered">
+            <svg class="u-svg sg-icon" viewBox="0 0 24 24">
+                <path class="u-path" d="M4 12 L20 12 M12 4 L12 20" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke" />
+            </svg>
+            <p><code class="sg-code">u-svg + u-path (stroke)</code></p>
+        </div>
+        <div class="sg-demo sg-centered">
+            <svg class="u-svg sg-icon" viewBox="0 0 24 24">
+                <circle class="u-path" cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke" />
+                <path class="u-path" d="M8 12 L11 15 L16 9" stroke="currentColor" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke" />
+            </svg>
+            <p><code class="sg-code">u-svg compound icon</code></p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ SECTION 12 — CLASS INDEX ═══════════════════ -->
+<section id="section-12" class="sg-section">
+    <h2 class="sg-h">12. Class index</h2>
+    <p class="sg-desc">Every LUMOS utility class in the project, one row per class — no compression. Grouped by category, alphabetical inside each group.</p>
+
+    <div class="sg-class-idx">
+    <table>
+        <thead><tr><th>Class</th><th>Category</th><th>Notes</th></tr></thead>
+        <tbody>
+        <tr class="sg-group-row"><td colspan="3">Theme · Color</td></tr>
+        <tr><td><code>u-theme-inherit</code></td><td>Theme</td><td>inherits parent theme</td></tr>
+        <tr><td><code>u-theme-light</code></td><td>Theme</td><td>light theme mode</td></tr>
+        <tr><td><code>u-theme-dark</code></td><td>Theme</td><td>dark theme mode</td></tr>
+        <tr><td><code>u-theme-brand</code></td><td>Theme</td><td>brand theme mode</td></tr>
+        <tr><td><code>u-heading-accent</code></td><td>Color</td><td>saffron accent color on headings</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Typography — Text style</td></tr>
+        <tr><td><code>u-text-style-display</code></td><td>Text style</td><td>display heading scale</td></tr>
+        <tr><td><code>u-text-style-h1</code></td><td>Text style</td><td>h1 preset</td></tr>
+        <tr><td><code>u-text-style-h2</code></td><td>Text style</td><td>h2 preset</td></tr>
+        <tr><td><code>u-text-style-h3</code></td><td>Text style</td><td>h3 preset</td></tr>
+        <tr><td><code>u-text-style-h4</code></td><td>Text style</td><td>h4 preset</td></tr>
+        <tr><td><code>u-text-style-h5</code></td><td>Text style</td><td>h5 preset</td></tr>
+        <tr><td><code>u-text-style-h6</code></td><td>Text style</td><td>h6 preset</td></tr>
+        <tr><td><code>u-text-style-large</code></td><td>Text style</td><td>large body</td></tr>
+        <tr><td><code>u-text-style-main</code></td><td>Text style</td><td>default body</td></tr>
+        <tr><td><code>u-text-style-small</code></td><td>Text style</td><td>small body</td></tr>
+        <tr><td><code>c-heading</code></td><td>Component</td><td>heading component, style via <code>data-style</code></td></tr>
+        <tr><td><code>c-paragraph</code></td><td>Component</td><td>paragraph component</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Typography — Weight / line / letter</td></tr>
+        <tr><td><code>u-weight-regular</code></td><td>Typography</td><td>400</td></tr>
+        <tr><td><code>u-weight-medium</code></td><td>Typography</td><td>500</td></tr>
+        <tr><td><code>u-weight-bold</code></td><td>Typography</td><td>700</td></tr>
+        <tr><td><code>u-line-height-small</code></td><td>Typography</td><td>1.2</td></tr>
+        <tr><td><code>u-line-height-medium</code></td><td>Typography</td><td>1.3</td></tr>
+        <tr><td><code>u-line-height-large</code></td><td>Typography</td><td>1.4</td></tr>
+        <tr><td><code>u-line-height-huge</code></td><td>Typography</td><td>1.6</td></tr>
+        <tr><td><code>u-letter-spacing-tight</code></td><td>Typography</td><td>-0.01em</td></tr>
+        <tr><td><code>u-letter-spacing-normal</code></td><td>Typography</td><td>0</td></tr>
+        <tr><td><code>u-line-clamp-1</code></td><td>Typography</td><td>clamp to 1 line</td></tr>
+        <tr><td><code>u-line-clamp-2</code></td><td>Typography</td><td>clamp to 2 lines</td></tr>
+        <tr><td><code>u-line-clamp-3</code></td><td>Typography</td><td>clamp to 3 lines</td></tr>
+        <tr><td><code>u-line-clamp-4</code></td><td>Typography</td><td>clamp to 4 lines</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Typography — Transform / wrap / alignment / misc</td></tr>
+        <tr><td><code>u-text-transform-none</code></td><td>Typography</td><td>inherit case</td></tr>
+        <tr><td><code>u-text-transform-uppercase</code></td><td>Typography</td><td>UPPERCASE</td></tr>
+        <tr><td><code>u-text-transform-capitalize</code></td><td>Typography</td><td>Capitalise Each Word</td></tr>
+        <tr><td><code>u-text-transform-lowercase</code></td><td>Typography</td><td>lowercase</td></tr>
+        <tr><td><code>u-text-wrap-default</code></td><td>Typography</td><td>browser default</td></tr>
+        <tr><td><code>u-text-wrap-balance</code></td><td>Typography</td><td>balance line lengths</td></tr>
+        <tr><td><code>u-text-wrap-pretty</code></td><td>Typography</td><td>no orphans</td></tr>
+        <tr><td><code>u-text-trim-off</code></td><td>Typography</td><td>disable line-height trim</td></tr>
+        <tr><td><code>u-margin-trim</code></td><td>Typography</td><td>strip first-/last-child margins</td></tr>
+        <tr><td><code>u-ignore-trim</code></td><td>Typography</td><td>opt out of parent trim</td></tr>
+        <tr><td><code>u-alignment-start</code></td><td>Typography</td><td>alignment-mode: start</td></tr>
+        <tr><td><code>u-alignment-center</code></td><td>Typography</td><td>alignment-mode: center</td></tr>
+        <tr><td><code>u-alignment-end</code></td><td>Typography</td><td>alignment-mode: end</td></tr>
+        <tr><td><code>u-alignment-inherit</code></td><td>Typography</td><td>inherit alignment mode</td></tr>
+        <tr><td><code>u-sr-only</code></td><td>Typography</td><td>screen-reader-only</td></tr>
+        <tr><td><code>u-rich-text</code></td><td>Typography</td><td>rich text container</td></tr>
+        <tr><td><code>u-child-contain</code></td><td>Typography</td><td>prevent child overflow</td></tr>
+        <tr><td><code>u-eyebrow-wrapper</code></td><td>Typography</td><td>eyebrow container</td></tr>
+        <tr><td><code>u-eyebrow-text</code></td><td>Typography</td><td>eyebrow text</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Element</td></tr>
+        <tr><td><code>u-section</code></td><td>Element</td><td>page section wrapper</td></tr>
+        <tr><td><code>u-section-spacer</code></td><td>Element</td><td>vertical spacer</td></tr>
+        <tr><td><code>u-container</code></td><td>Element</td><td>main max-width container (90rem)</td></tr>
+        <tr><td><code>u-container-small</code></td><td>Element</td><td>narrow container (50rem)</td></tr>
+        <tr><td><code>u-container-full</code></td><td>Element</td><td>full-width container (100%)</td></tr>
+        <tr><td><code>u-svg</code></td><td>Element</td><td>SVG wrapper</td></tr>
+        <tr><td><code>u-path</code></td><td>Element</td><td>SVG path/shape</td></tr>
+        <tr><td><code>u-content-wrapper</code></td><td>Element</td><td>group headings + paragraphs + buttons</td></tr>
+        <tr><td><code>u-button-group</code></td><td>Element</td><td>horizontal button row</td></tr>
+        <tr><td><code>u-embed-css</code></td><td>Element</td><td>CSS embed block</td></tr>
+        <tr><td><code>u-embed-js</code></td><td>Element</td><td>JS embed block</td></tr>
+        <tr><td><code>u-cover</code></td><td>Element</td><td>relative cover image</td></tr>
+        <tr><td><code>u-cover-absolute</code></td><td>Element</td><td>absolute cover (fills parent)</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Flexbox</td></tr>
+        <tr><td><code>u-flex-horizontal-wrap</code></td><td>Flex</td><td>flex row, wraps</td></tr>
+        <tr><td><code>u-flex-horizontal-nowrap</code></td><td>Flex</td><td>flex row, no wrap</td></tr>
+        <tr><td><code>u-flex-vertical-wrap</code></td><td>Flex</td><td>flex column, wraps</td></tr>
+        <tr><td><code>u-flex-vertical-nowrap</code></td><td>Flex</td><td>flex column, no wrap</td></tr>
+        <tr><td><code>u-flex-grow</code></td><td>Flex</td><td>grow to fill space</td></tr>
+        <tr><td><code>u-flex-shrink</code></td><td>Flex</td><td>shrink when needed</td></tr>
+        <tr><td><code>u-flex-noshrink</code></td><td>Flex</td><td>never shrink</td></tr>
+        <tr><td><code>u-align-items-variable</code></td><td>Flex</td><td>follows alignment-mode</td></tr>
+        <tr><td><code>u-align-items-start</code></td><td>Flex</td><td>align start</td></tr>
+        <tr><td><code>u-align-items-center</code></td><td>Flex</td><td>align center</td></tr>
+        <tr><td><code>u-align-items-end</code></td><td>Flex</td><td>align end</td></tr>
+        <tr><td><code>u-align-items-stretch</code></td><td>Flex</td><td>stretch to fill cross-axis</td></tr>
+        <tr><td><code>u-align-self-variable</code></td><td>Flex</td><td>child follows alignment-mode</td></tr>
+        <tr><td><code>u-align-self-start</code></td><td>Flex</td><td>self align start</td></tr>
+        <tr><td><code>u-align-self-center</code></td><td>Flex</td><td>self align center</td></tr>
+        <tr><td><code>u-align-self-end</code></td><td>Flex</td><td>self align end</td></tr>
+        <tr><td><code>u-align-self-stretch</code></td><td>Flex</td><td>self stretch</td></tr>
+        <tr><td><code>u-justify-content-variable</code></td><td>Flex</td><td>follows alignment-mode</td></tr>
+        <tr><td><code>u-justify-content-start</code></td><td>Flex</td><td>justify start</td></tr>
+        <tr><td><code>u-justify-content-center</code></td><td>Flex</td><td>justify center</td></tr>
+        <tr><td><code>u-justify-content-end</code></td><td>Flex</td><td>justify end</td></tr>
+        <tr><td><code>u-justify-content-between</code></td><td>Flex</td><td>space-between</td></tr>
+        <tr><td><code>u-justify-content-around</code></td><td>Flex</td><td>space-around</td></tr>
+        <tr><td><code>u-order-first</code></td><td>Flex</td><td>render first</td></tr>
+        <tr><td><code>u-order-last</code></td><td>Flex</td><td>render last</td></tr>
+        <tr><td><code>u-order-unset-above</code></td><td>Flex</td><td>unset order above threshold</td></tr>
+        <tr><td><code>u-order-unset-below</code></td><td>Flex</td><td>unset order below threshold</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Grid</td></tr>
+        <tr><td><code>u-grid-custom</code></td><td>Grid</td><td>custom N-column grid</td></tr>
+        <tr><td><code>u-grid-subgrid</code></td><td>Grid</td><td>inherits parent grid</td></tr>
+        <tr><td><code>u-grid-autofit</code></td><td>Grid</td><td>auto-fit responsive grid</td></tr>
+        <tr><td><code>u-grid-autofill</code></td><td>Grid</td><td>auto-fill responsive grid</td></tr>
+        <tr><td><code>u-grid-above</code></td><td>Grid</td><td>12-col above threshold, flex below</td></tr>
+        <tr><td><code>u-grid-below</code></td><td>Grid</td><td>flex above threshold, 12-col below</td></tr>
+        <tr><td><code>u-grid-breakout</code></td><td>Grid</td><td>content + full-bleed breakout</td></tr>
+        <tr><td><code>u-threshold-small</code></td><td>Grid</td><td>container query threshold (small)</td></tr>
+        <tr><td><code>u-threshold-medium</code></td><td>Grid</td><td>container query threshold (medium)</td></tr>
+        <tr><td><code>u-threshold-large</code></td><td>Grid</td><td>container query threshold (large)</td></tr>
+        <tr><td><code>u-all-unset-above</code></td><td>Grid</td><td>reset all utilities above threshold</td></tr>
+        <tr><td><code>u-all-unset-below</code></td><td>Grid</td><td>reset all utilities below threshold</td></tr>
+        <tr><td><code>u-column-full</code></td><td>Grid</td><td>span all columns</td></tr>
+        <tr><td><code>u-column-indent</code></td><td>Grid</td><td>indent by one column</td></tr>
+        <tr><td><code>u-column-1</code></td><td>Grid</td><td>span 1 column</td></tr>
+        <tr><td><code>u-column-2</code></td><td>Grid</td><td>span 2 columns</td></tr>
+        <tr><td><code>u-column-3</code></td><td>Grid</td><td>span 3 columns</td></tr>
+        <tr><td><code>u-column-4</code></td><td>Grid</td><td>span 4 columns</td></tr>
+        <tr><td><code>u-column-5</code></td><td>Grid</td><td>span 5 columns</td></tr>
+        <tr><td><code>u-column-6</code></td><td>Grid</td><td>span 6 columns</td></tr>
+        <tr><td><code>u-column-7</code></td><td>Grid</td><td>span 7 columns</td></tr>
+        <tr><td><code>u-column-8</code></td><td>Grid</td><td>span 8 columns</td></tr>
+        <tr><td><code>u-column-9</code></td><td>Grid</td><td>span 9 columns</td></tr>
+        <tr><td><code>u-column-10</code></td><td>Grid</td><td>span 10 columns</td></tr>
+        <tr><td><code>u-column-11</code></td><td>Grid</td><td>span 11 columns</td></tr>
+        <tr><td><code>u-column-12</code></td><td>Grid</td><td>span 12 columns</td></tr>
+        <tr><td><code>u-column-start-auto</code></td><td>Grid</td><td>auto start</td></tr>
+        <tr><td><code>u-column-start-1</code></td><td>Grid</td><td>start at col 1</td></tr>
+        <tr><td><code>u-column-start-2</code></td><td>Grid</td><td>start at col 2</td></tr>
+        <tr><td><code>u-column-start-3</code></td><td>Grid</td><td>start at col 3</td></tr>
+        <tr><td><code>u-column-start-4</code></td><td>Grid</td><td>start at col 4</td></tr>
+        <tr><td><code>u-column-start-5</code></td><td>Grid</td><td>start at col 5</td></tr>
+        <tr><td><code>u-column-start-6</code></td><td>Grid</td><td>start at col 6</td></tr>
+        <tr><td><code>u-column-start-7</code></td><td>Grid</td><td>start at col 7</td></tr>
+        <tr><td><code>u-column-start-8</code></td><td>Grid</td><td>start at col 8</td></tr>
+        <tr><td><code>u-column-start-9</code></td><td>Grid</td><td>start at col 9</td></tr>
+        <tr><td><code>u-column-start-10</code></td><td>Grid</td><td>start at col 10</td></tr>
+        <tr><td><code>u-column-start-11</code></td><td>Grid</td><td>start at col 11</td></tr>
+        <tr><td><code>u-column-start-12</code></td><td>Grid</td><td>start at col 12</td></tr>
+        <tr><td><code>u-row-start-auto</code></td><td>Grid</td><td>auto row start</td></tr>
+        <tr><td><code>u-row-start-1</code></td><td>Grid</td><td>start at row 1</td></tr>
+        <tr><td><code>u-row-start-2</code></td><td>Grid</td><td>start at row 2</td></tr>
+        <tr><td><code>u-row-start-3</code></td><td>Grid</td><td>start at row 3</td></tr>
+        <tr><td><code>u-row-start-4</code></td><td>Grid</td><td>start at row 4</td></tr>
+        <tr><td><code>u-row-start-5</code></td><td>Grid</td><td>start at row 5</td></tr>
+        <tr><td><code>u-row-start-6</code></td><td>Grid</td><td>start at row 6</td></tr>
+        <tr><td><code>u-row-span-1</code></td><td>Grid</td><td>span 1 row</td></tr>
+        <tr><td><code>u-row-span-2</code></td><td>Grid</td><td>span 2 rows</td></tr>
+        <tr><td><code>u-row-span-3</code></td><td>Grid</td><td>span 3 rows</td></tr>
+        <tr><td><code>u-row-span-4</code></td><td>Grid</td><td>span 4 rows</td></tr>
+        <tr><td><code>u-row-span-5</code></td><td>Grid</td><td>span 5 rows</td></tr>
+        <tr><td><code>u-row-span-6</code></td><td>Grid</td><td>span 6 rows</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Spacing — Gap</td></tr>
+        <tr><td><code>u-gap-inline-gutter</code></td><td>Gap</td><td>inline gap = site gutter</td></tr>
+        <tr><td><code>u-gap-inline-0</code></td><td>Gap</td><td>inline gap 0</td></tr>
+        <tr><td><code>u-gap-inline-1</code></td><td>Gap</td><td>inline gap 8px</td></tr>
+        <tr><td><code>u-gap-inline-2</code></td><td>Gap</td><td>inline gap 12px</td></tr>
+        <tr><td><code>u-gap-inline-3</code></td><td>Gap</td><td>inline gap 16px</td></tr>
+        <tr><td><code>u-gap-inline-4</code></td><td>Gap</td><td>inline gap 24px</td></tr>
+        <tr><td><code>u-gap-inline-5</code></td><td>Gap</td><td>inline gap 32px</td></tr>
+        <tr><td><code>u-gap-inline-6</code></td><td>Gap</td><td>inline gap 40px</td></tr>
+        <tr><td><code>u-gap-inline-7</code></td><td>Gap</td><td>inline gap 48px</td></tr>
+        <tr><td><code>u-gap-inline-8</code></td><td>Gap</td><td>inline gap 64px</td></tr>
+        <tr><td><code>u-gap-row-inherit</code></td><td>Gap</td><td>row gap inherits</td></tr>
+        <tr><td><code>u-gap-row-gutter</code></td><td>Gap</td><td>row gap = site gutter</td></tr>
+        <tr><td><code>u-gap-row-0</code></td><td>Gap</td><td>row gap 0</td></tr>
+        <tr><td><code>u-gap-row-1</code></td><td>Gap</td><td>row gap 8px</td></tr>
+        <tr><td><code>u-gap-row-2</code></td><td>Gap</td><td>row gap 12px</td></tr>
+        <tr><td><code>u-gap-row-3</code></td><td>Gap</td><td>row gap 16px</td></tr>
+        <tr><td><code>u-gap-row-4</code></td><td>Gap</td><td>row gap 24px</td></tr>
+        <tr><td><code>u-gap-row-5</code></td><td>Gap</td><td>row gap 32px</td></tr>
+        <tr><td><code>u-gap-row-6</code></td><td>Gap</td><td>row gap 40px</td></tr>
+        <tr><td><code>u-gap-row-7</code></td><td>Gap</td><td>row gap 48px</td></tr>
+        <tr><td><code>u-gap-row-8</code></td><td>Gap</td><td>row gap 64px</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Spacing — Margin</td></tr>
+        <tr><td><code>u-margin-top-gutter</code></td><td>Margin</td><td>top = site gutter</td></tr>
+        <tr><td><code>u-margin-top-text</code></td><td>Margin</td><td>top = text margin</td></tr>
+        <tr><td><code>u-margin-top-auto</code></td><td>Margin</td><td>top auto</td></tr>
+        <tr><td><code>u-margin-top-0</code></td><td>Margin</td><td>top 0</td></tr>
+        <tr><td><code>u-margin-top-1</code></td><td>Margin</td><td>top 8px</td></tr>
+        <tr><td><code>u-margin-top-2</code></td><td>Margin</td><td>top 12px</td></tr>
+        <tr><td><code>u-margin-top-3</code></td><td>Margin</td><td>top 16px</td></tr>
+        <tr><td><code>u-margin-top-4</code></td><td>Margin</td><td>top 24px</td></tr>
+        <tr><td><code>u-margin-top-5</code></td><td>Margin</td><td>top 32px</td></tr>
+        <tr><td><code>u-margin-top-6</code></td><td>Margin</td><td>top 40px</td></tr>
+        <tr><td><code>u-margin-top-7</code></td><td>Margin</td><td>top 48px</td></tr>
+        <tr><td><code>u-margin-top-8</code></td><td>Margin</td><td>top 64px</td></tr>
+        <tr><td><code>u-margin-bottom-gutter</code></td><td>Margin</td><td>bottom = site gutter</td></tr>
+        <tr><td><code>u-margin-bottom-text</code></td><td>Margin</td><td>bottom = text margin</td></tr>
+        <tr><td><code>u-margin-bottom-auto</code></td><td>Margin</td><td>bottom auto</td></tr>
+        <tr><td><code>u-margin-bottom-0</code></td><td>Margin</td><td>bottom 0</td></tr>
+        <tr><td><code>u-margin-bottom-1</code></td><td>Margin</td><td>bottom 8px</td></tr>
+        <tr><td><code>u-margin-bottom-2</code></td><td>Margin</td><td>bottom 12px</td></tr>
+        <tr><td><code>u-margin-bottom-3</code></td><td>Margin</td><td>bottom 16px</td></tr>
+        <tr><td><code>u-margin-bottom-4</code></td><td>Margin</td><td>bottom 24px</td></tr>
+        <tr><td><code>u-margin-bottom-5</code></td><td>Margin</td><td>bottom 32px</td></tr>
+        <tr><td><code>u-margin-bottom-6</code></td><td>Margin</td><td>bottom 40px</td></tr>
+        <tr><td><code>u-margin-bottom-7</code></td><td>Margin</td><td>bottom 48px</td></tr>
+        <tr><td><code>u-margin-bottom-8</code></td><td>Margin</td><td>bottom 64px</td></tr>
+        <tr><td><code>u-margin-inline-auto</code></td><td>Margin</td><td>center horizontally</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Spacing — Padding (all sides)</td></tr>
+        <tr><td><code>u-padding-sitemargin</code></td><td>Padding</td><td>site-margin on all sides</td></tr>
+        <tr><td><code>u-padding-gutter</code></td><td>Padding</td><td>gutter on all sides</td></tr>
+        <tr><td><code>u-padding-0</code></td><td>Padding</td><td>0 all sides</td></tr>
+        <tr><td><code>u-padding-1</code></td><td>Padding</td><td>8px all sides</td></tr>
+        <tr><td><code>u-padding-2</code></td><td>Padding</td><td>12px all sides</td></tr>
+        <tr><td><code>u-padding-3</code></td><td>Padding</td><td>16px all sides</td></tr>
+        <tr><td><code>u-padding-4</code></td><td>Padding</td><td>24px all sides</td></tr>
+        <tr><td><code>u-padding-5</code></td><td>Padding</td><td>32px all sides</td></tr>
+        <tr><td><code>u-padding-6</code></td><td>Padding</td><td>40px all sides</td></tr>
+        <tr><td><code>u-padding-7</code></td><td>Padding</td><td>48px all sides</td></tr>
+        <tr><td><code>u-padding-8</code></td><td>Padding</td><td>64px all sides</td></tr>
+        <tr><td><code>u-padding-small</code></td><td>Padding</td><td>section small 80px</td></tr>
+        <tr><td><code>u-padding-main</code></td><td>Padding</td><td>section main 112px</td></tr>
+        <tr><td><code>u-padding-large</code></td><td>Padding</td><td>section large 160px</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Spacing — Padding (block / inline / directional)</td></tr>
+        <tr><td><code>u-padding-block-sitemargin</code></td><td>Padding</td><td>block = site margin</td></tr>
+        <tr><td><code>u-padding-block-gutter</code></td><td>Padding</td><td>block = gutter</td></tr>
+        <tr><td><code>u-padding-block-0</code></td><td>Padding</td><td>block 0</td></tr>
+        <tr><td><code>u-padding-block-1</code></td><td>Padding</td><td>block 8px</td></tr>
+        <tr><td><code>u-padding-block-2</code></td><td>Padding</td><td>block 12px</td></tr>
+        <tr><td><code>u-padding-block-3</code></td><td>Padding</td><td>block 16px</td></tr>
+        <tr><td><code>u-padding-block-4</code></td><td>Padding</td><td>block 24px</td></tr>
+        <tr><td><code>u-padding-block-5</code></td><td>Padding</td><td>block 32px</td></tr>
+        <tr><td><code>u-padding-block-6</code></td><td>Padding</td><td>block 40px</td></tr>
+        <tr><td><code>u-padding-block-7</code></td><td>Padding</td><td>block 48px</td></tr>
+        <tr><td><code>u-padding-block-8</code></td><td>Padding</td><td>block 64px</td></tr>
+        <tr><td><code>u-padding-block-small</code></td><td>Padding</td><td>block section small</td></tr>
+        <tr><td><code>u-padding-block-main</code></td><td>Padding</td><td>block section main</td></tr>
+        <tr><td><code>u-padding-block-large</code></td><td>Padding</td><td>block section large</td></tr>
+        <tr><td><code>u-padding-inline-sitemargin</code></td><td>Padding</td><td>inline = site margin</td></tr>
+        <tr><td><code>u-padding-inline-gutter</code></td><td>Padding</td><td>inline = gutter</td></tr>
+        <tr><td><code>u-padding-inline-0</code></td><td>Padding</td><td>inline 0</td></tr>
+        <tr><td><code>u-padding-inline-1</code></td><td>Padding</td><td>inline 8px</td></tr>
+        <tr><td><code>u-padding-inline-2</code></td><td>Padding</td><td>inline 12px</td></tr>
+        <tr><td><code>u-padding-inline-3</code></td><td>Padding</td><td>inline 16px</td></tr>
+        <tr><td><code>u-padding-inline-4</code></td><td>Padding</td><td>inline 24px</td></tr>
+        <tr><td><code>u-padding-inline-5</code></td><td>Padding</td><td>inline 32px</td></tr>
+        <tr><td><code>u-padding-inline-6</code></td><td>Padding</td><td>inline 40px</td></tr>
+        <tr><td><code>u-padding-inline-7</code></td><td>Padding</td><td>inline 48px</td></tr>
+        <tr><td><code>u-padding-inline-8</code></td><td>Padding</td><td>inline 64px</td></tr>
+        <tr><td><code>u-padding-top-sitemargin</code></td><td>Padding</td><td>top = site margin</td></tr>
+        <tr><td><code>u-padding-top-gutter</code></td><td>Padding</td><td>top = gutter</td></tr>
+        <tr><td><code>u-padding-top-0</code></td><td>Padding</td><td>top 0</td></tr>
+        <tr><td><code>u-padding-top-1</code></td><td>Padding</td><td>top 8px</td></tr>
+        <tr><td><code>u-padding-top-2</code></td><td>Padding</td><td>top 12px</td></tr>
+        <tr><td><code>u-padding-top-3</code></td><td>Padding</td><td>top 16px</td></tr>
+        <tr><td><code>u-padding-top-4</code></td><td>Padding</td><td>top 24px</td></tr>
+        <tr><td><code>u-padding-top-5</code></td><td>Padding</td><td>top 32px</td></tr>
+        <tr><td><code>u-padding-top-6</code></td><td>Padding</td><td>top 40px</td></tr>
+        <tr><td><code>u-padding-top-7</code></td><td>Padding</td><td>top 48px</td></tr>
+        <tr><td><code>u-padding-top-8</code></td><td>Padding</td><td>top 64px</td></tr>
+        <tr><td><code>u-padding-top-small</code></td><td>Padding</td><td>top section small</td></tr>
+        <tr><td><code>u-padding-top-main</code></td><td>Padding</td><td>top section main</td></tr>
+        <tr><td><code>u-padding-top-large</code></td><td>Padding</td><td>top section large</td></tr>
+        <tr><td><code>u-padding-bottom-sitemargin</code></td><td>Padding</td><td>bottom = site margin</td></tr>
+        <tr><td><code>u-padding-bottom-gutter</code></td><td>Padding</td><td>bottom = gutter</td></tr>
+        <tr><td><code>u-padding-bottom-0</code></td><td>Padding</td><td>bottom 0</td></tr>
+        <tr><td><code>u-padding-bottom-1</code></td><td>Padding</td><td>bottom 8px</td></tr>
+        <tr><td><code>u-padding-bottom-2</code></td><td>Padding</td><td>bottom 12px</td></tr>
+        <tr><td><code>u-padding-bottom-3</code></td><td>Padding</td><td>bottom 16px</td></tr>
+        <tr><td><code>u-padding-bottom-4</code></td><td>Padding</td><td>bottom 24px</td></tr>
+        <tr><td><code>u-padding-bottom-5</code></td><td>Padding</td><td>bottom 32px</td></tr>
+        <tr><td><code>u-padding-bottom-6</code></td><td>Padding</td><td>bottom 40px</td></tr>
+        <tr><td><code>u-padding-bottom-7</code></td><td>Padding</td><td>bottom 48px</td></tr>
+        <tr><td><code>u-padding-bottom-8</code></td><td>Padding</td><td>bottom 64px</td></tr>
+        <tr><td><code>u-padding-bottom-small</code></td><td>Padding</td><td>bottom section small</td></tr>
+        <tr><td><code>u-padding-bottom-main</code></td><td>Padding</td><td>bottom section main</td></tr>
+        <tr><td><code>u-padding-bottom-large</code></td><td>Padding</td><td>bottom section large</td></tr>
+        <tr><td><code>u-padding-left-sitemargin</code></td><td>Padding</td><td>left = site margin</td></tr>
+        <tr><td><code>u-padding-left-gutter</code></td><td>Padding</td><td>left = gutter</td></tr>
+        <tr><td><code>u-padding-left-0</code></td><td>Padding</td><td>left 0</td></tr>
+        <tr><td><code>u-padding-left-1</code></td><td>Padding</td><td>left 8px</td></tr>
+        <tr><td><code>u-padding-left-2</code></td><td>Padding</td><td>left 12px</td></tr>
+        <tr><td><code>u-padding-left-3</code></td><td>Padding</td><td>left 16px</td></tr>
+        <tr><td><code>u-padding-left-4</code></td><td>Padding</td><td>left 24px</td></tr>
+        <tr><td><code>u-padding-left-5</code></td><td>Padding</td><td>left 32px</td></tr>
+        <tr><td><code>u-padding-left-6</code></td><td>Padding</td><td>left 40px</td></tr>
+        <tr><td><code>u-padding-left-7</code></td><td>Padding</td><td>left 48px</td></tr>
+        <tr><td><code>u-padding-left-8</code></td><td>Padding</td><td>left 64px</td></tr>
+        <tr><td><code>u-padding-right-sitemargin</code></td><td>Padding</td><td>right = site margin</td></tr>
+        <tr><td><code>u-padding-right-gutter</code></td><td>Padding</td><td>right = gutter</td></tr>
+        <tr><td><code>u-padding-right-0</code></td><td>Padding</td><td>right 0</td></tr>
+        <tr><td><code>u-padding-right-1</code></td><td>Padding</td><td>right 8px</td></tr>
+        <tr><td><code>u-padding-right-2</code></td><td>Padding</td><td>right 12px</td></tr>
+        <tr><td><code>u-padding-right-3</code></td><td>Padding</td><td>right 16px</td></tr>
+        <tr><td><code>u-padding-right-4</code></td><td>Padding</td><td>right 24px</td></tr>
+        <tr><td><code>u-padding-right-5</code></td><td>Padding</td><td>right 32px</td></tr>
+        <tr><td><code>u-padding-right-6</code></td><td>Padding</td><td>right 40px</td></tr>
+        <tr><td><code>u-padding-right-7</code></td><td>Padding</td><td>right 48px</td></tr>
+        <tr><td><code>u-padding-right-8</code></td><td>Padding</td><td>right 64px</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Sizing</td></tr>
+        <tr><td><code>u-width-full</code></td><td>Sizing</td><td>width 100%</td></tr>
+        <tr><td><code>u-height-full</code></td><td>Sizing</td><td>height 100%</td></tr>
+        <tr><td><code>u-min-height-screen</code></td><td>Sizing</td><td>min-height 100vh</td></tr>
+        <tr><td><code>u-max-width-none</code></td><td>Sizing</td><td>remove max-width</td></tr>
+        <tr><td><code>u-max-width-10ch</code></td><td>Sizing</td><td>max-width 10 char units</td></tr>
+        <tr><td><code>u-max-width-12ch</code></td><td>Sizing</td><td>max-width 12 char units</td></tr>
+        <tr><td><code>u-max-width-14ch</code></td><td>Sizing</td><td>max-width 14 char units</td></tr>
+        <tr><td><code>u-max-width-16ch</code></td><td>Sizing</td><td>max-width 16 char units</td></tr>
+        <tr><td><code>u-max-width-18ch</code></td><td>Sizing</td><td>max-width 18 char units</td></tr>
+        <tr><td><code>u-max-width-20ch</code></td><td>Sizing</td><td>max-width 20 char units</td></tr>
+        <tr><td><code>u-max-width-25ch</code></td><td>Sizing</td><td>max-width 25 char units</td></tr>
+        <tr><td><code>u-max-width-30ch</code></td><td>Sizing</td><td>max-width 30 char units</td></tr>
+        <tr><td><code>u-max-width-35ch</code></td><td>Sizing</td><td>max-width 35 char units</td></tr>
+        <tr><td><code>u-max-width-40ch</code></td><td>Sizing</td><td>max-width 40 char units</td></tr>
+        <tr><td><code>u-max-width-45ch</code></td><td>Sizing</td><td>max-width 45 char units</td></tr>
+        <tr><td><code>u-max-width-50ch</code></td><td>Sizing</td><td>max-width 50 char units</td></tr>
+        <tr><td><code>u-max-width-60ch</code></td><td>Sizing</td><td>max-width 60 char units</td></tr>
+        <tr><td><code>u-max-width-70ch</code></td><td>Sizing</td><td>max-width 70 char units</td></tr>
+        <tr><td><code>u-max-width-80ch</code></td><td>Sizing</td><td>max-width 80 char units</td></tr>
+        <tr><td><code>u-object-fit-cover</code></td><td>Sizing</td><td>object-fit: cover</td></tr>
+        <tr><td><code>u-object-fit-contain</code></td><td>Sizing</td><td>object-fit: contain</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Aspect ratio</td></tr>
+        <tr><td><code>u-ratio-1</code></td><td>Ratio</td><td>1:1 square</td></tr>
+        <tr><td><code>u-ratio-16-9</code></td><td>Ratio</td><td>16:9 landscape</td></tr>
+        <tr><td><code>u-ratio-3-1</code></td><td>Ratio</td><td>3:1 wide banner</td></tr>
+        <tr><td><code>u-ratio-2-1</code></td><td>Ratio</td><td>2:1 panorama</td></tr>
+        <tr><td><code>u-ratio-2-3</code></td><td>Ratio</td><td>2:3 portrait</td></tr>
+        <tr><td><code>u-ratio-5-4</code></td><td>Ratio</td><td>5:4 landscape</td></tr>
+        <tr><td><code>u-ratio-4-5</code></td><td>Ratio</td><td>4:5 portrait</td></tr>
+        <tr><td><code>u-ratio-21-9</code></td><td>Ratio</td><td>21:9 cinematic</td></tr>
+        <tr><td><code>u-ratio-9-16</code></td><td>Ratio</td><td>9:16 story</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Radius</td></tr>
+        <tr><td><code>u-radius-none</code></td><td>Radius</td><td>no radius</td></tr>
+        <tr><td><code>u-radius-inherit</code></td><td>Radius</td><td>inherit from parent</td></tr>
+        <tr><td><code>u-radius-small</code></td><td>Radius</td><td>6px</td></tr>
+        <tr><td><code>u-radius-main</code></td><td>Radius</td><td>8px</td></tr>
+        <tr><td><code>u-radius-round</code></td><td>Radius</td><td>100vw (pill/circle)</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Position & z-index</td></tr>
+        <tr><td><code>u-position-static</code></td><td>Position</td><td>static (default)</td></tr>
+        <tr><td><code>u-position-relative</code></td><td>Position</td><td>relative</td></tr>
+        <tr><td><code>u-position-absolute</code></td><td>Position</td><td>absolute</td></tr>
+        <tr><td><code>u-position-sticky</code></td><td>Position</td><td>sticky</td></tr>
+        <tr><td><code>u-position-fixed</code></td><td>Position</td><td>fixed</td></tr>
+        <tr><td><code>u-zindex-negative</code></td><td>Position</td><td>z-index -1</td></tr>
+        <tr><td><code>u-zindex-unset</code></td><td>Position</td><td>z-index unset</td></tr>
+        <tr><td><code>u-zindex-0</code></td><td>Position</td><td>z-index 0</td></tr>
+        <tr><td><code>u-zindex-1</code></td><td>Position</td><td>z-index 1</td></tr>
+        <tr><td><code>u-zindex-2</code></td><td>Position</td><td>z-index 2</td></tr>
+        <tr><td><code>u-zindex-3</code></td><td>Position</td><td>z-index 3</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Overflow</td></tr>
+        <tr><td><code>u-overflow-visible</code></td><td>Overflow</td><td>visible (default)</td></tr>
+        <tr><td><code>u-overflow-hidden</code></td><td>Overflow</td><td>hidden</td></tr>
+        <tr><td><code>u-overflow-clip</code></td><td>Overflow</td><td>clip (no scroll)</td></tr>
+        <tr><td><code>u-overflow-x-auto</code></td><td>Overflow</td><td>horizontal scroll</td></tr>
+        <tr><td><code>u-overflow-y-auto</code></td><td>Overflow</td><td>vertical scroll</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Visibility & display</td></tr>
+        <tr><td><code>u-display-contents</code></td><td>Display</td><td>display: contents</td></tr>
+        <tr><td><code>u-hide-if-empty</code></td><td>Display</td><td>hide when no children</td></tr>
+        <tr><td><code>u-hide-if-empty-cms</code></td><td>Display</td><td>hide when CMS feed is empty</td></tr>
+        <tr><td><code>u-pointer-on</code></td><td>Pointer</td><td>pointer-events: auto</td></tr>
+        <tr><td><code>u-pointer-off</code></td><td>Pointer</td><td>pointer-events: none</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Image wrapper system</td></tr>
+        <tr><td><code>image-wrap</code></td><td>Image</td><td>wrapper base</td></tr>
+        <tr><td><code>image-wrap--square</code></td><td>Image</td><td>1:1 aspect</td></tr>
+        <tr><td><code>image-wrap--landscape</code></td><td>Image</td><td>16:9</td></tr>
+        <tr><td><code>image-wrap--landscape-classic</code></td><td>Image</td><td>4:3</td></tr>
+        <tr><td><code>image-wrap--landscape-photo</code></td><td>Image</td><td>3:2 (DSLR)</td></tr>
+        <tr><td><code>image-wrap--landscape-wide</code></td><td>Image</td><td>2:1</td></tr>
+        <tr><td><code>image-wrap--landscape-ultrawide</code></td><td>Image</td><td>21:9 cinematic</td></tr>
+        <tr><td><code>image-wrap--portrait</code></td><td>Image</td><td>2:3</td></tr>
+        <tr><td><code>image-wrap--portrait-tall</code></td><td>Image</td><td>4:5 (IG)</td></tr>
+        <tr><td><code>image-wrap--portrait-story</code></td><td>Image</td><td>9:16</td></tr>
+        <tr><td><code>image-wrap--circle</code></td><td>Image</td><td>1:1 + round radius</td></tr>
+        <tr><td><code>image-wrap--freeform</code></td><td>Image</td><td>fills parent</td></tr>
+        <tr><td><code>image-wrap--rounded-sm</code></td><td>Image</td><td>small radius modifier</td></tr>
+        <tr><td><code>image-wrap--rounded</code></td><td>Image</td><td>default radius modifier</td></tr>
+        <tr><td><code>image-wrap--rounded-lg</code></td><td>Image</td><td>large radius modifier</td></tr>
+        <tr><td><code>image-wrap__img</code></td><td>Image</td><td>inner image element</td></tr>
+        <tr><td><code>image-wrap__img--cover</code></td><td>Image</td><td>fill + crop</td></tr>
+        <tr><td><code>image-wrap__img--contain</code></td><td>Image</td><td>fit inside</td></tr>
+        <tr><td><code>image-wrap__img--fill</code></td><td>Image</td><td>stretch to fill</td></tr>
+        <tr><td><code>image-wrap__img--top</code></td><td>Image</td><td>align top</td></tr>
+        <tr><td><code>image-wrap__img--bottom</code></td><td>Image</td><td>align bottom</td></tr>
+        <tr><td><code>image-wrap__img--left</code></td><td>Image</td><td>align left</td></tr>
+        <tr><td><code>image-wrap__img--right</code></td><td>Image</td><td>align right</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Component patterns</td></tr>
+        <tr><td><code>button_main_wrap</code></td><td>Button</td><td>primary button outer wrapper</td></tr>
+        <tr><td><code>button_main_element</code></td><td>Button</td><td>button anchor/button element</td></tr>
+        <tr><td><code>button_main_text</code></td><td>Button</td><td>button label text</td></tr>
+        <tr><td><code>button_close_wrap</code></td><td>Button</td><td>close button outer wrapper</td></tr>
+        <tr><td><code>button_close_element</code></td><td>Button</td><td>close button inner element</td></tr>
+        <tr><td><code>button_close_icon</code></td><td>Button</td><td>close icon ✕</td></tr>
+        <tr><td><code>clickable_wrap</code></td><td>Clickable</td><td>makes a region clickable</td></tr>
+        <tr><td><code>clickable_link</code></td><td>Clickable</td><td>link element</td></tr>
+        <tr><td><code>clickable_btn</code></td><td>Clickable</td><td>button element</td></tr>
+        <tr><td><code>clickable_text</code></td><td>Clickable</td><td>accessible label text</td></tr>
+        <tr><td><code>hero-collage_content</code></td><td>Hero</td><td>hero collage grid container</td></tr>
+        <tr><td><code>hero-collage_title-top</code></td><td>Hero</td><td>hero top title</td></tr>
+        <tr><td><code>hero-collage_title-bottom</code></td><td>Hero</td><td>hero bottom title</td></tr>
+        <tr><td><code>hero-collage_image-wrap</code></td><td>Hero</td><td>hero image wrapper</td></tr>
+        <tr><td><code>hero-collage_image</code></td><td>Hero</td><td>hero image</td></tr>
+        <tr><td><code>hero-collage_logo-wrap</code></td><td>Hero</td><td>hero logo wrapper</td></tr>
+        <tr><td><code>hero-collage_logo</code></td><td>Hero</td><td>hero logo</td></tr>
+        <tr><td><code>page_wrap</code></td><td>Page</td><td>root page wrapper</td></tr>
+        <tr><td><code>page_main</code></td><td>Page</td><td>main landmark slot</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">State & trigger (attributes — not classes, documented for completeness)</td></tr>
+        <tr><td><code>data-state="checked"</code></td><td>State</td><td>contains checked input</td></tr>
+        <tr><td><code>data-state="current"</code></td><td>State</td><td>current page/anchor</td></tr>
+        <tr><td><code>data-state="open"</code></td><td>State</td><td>open dropdown/menu</td></tr>
+        <tr><td><code>data-state="expanded"</code></td><td>State</td><td>aria-expanded=true</td></tr>
+        <tr><td><code>data-state="pressed"</code></td><td>State</td><td>aria-pressed=true</td></tr>
+        <tr><td><code>data-state="external"</code></td><td>State</td><td>target=_blank link</td></tr>
+        <tr><td><code>data-trigger="hover"</code></td><td>Trigger</td><td>active on hover</td></tr>
+        <tr><td><code>data-trigger="focus"</code></td><td>Trigger</td><td>active on focus</td></tr>
+        <tr><td><code>data-trigger="mobile"</code></td><td>Trigger</td><td>touch device</td></tr>
+        <tr><td><code>data-trigger="preview"</code></td><td>Trigger</td><td>Webflow designer preview</td></tr>
+        <tr><td><code>data-trigger="group"</code></td><td>Trigger</td><td>parent affects siblings</td></tr>
+        <tr><td><code>is-active</code></td><td>State</td><td>direct active-state combo class</td></tr>
+        <tr><td><code>is-current</code></td><td>State</td><td>current-page combo class (navbar links)</td></tr>
+        <tr><td><code>is-open</code></td><td>State</td><td>open-state combo class (dropdowns)</td></tr>
+        <tr><td><code>is-dark</code></td><td>State</td><td>dark-variant combo class</td></tr>
+        <tr><td><code>is-light</code></td><td>State</td><td>light-variant combo class</td></tr>
+        <tr><td><code>is-large</code></td><td>State</td><td>large-size combo class</td></tr>
+        <tr><td><code>is-small</code></td><td>State</td><td>small-size combo class</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Accessibility &amp; semantic</td></tr>
+        <tr><td><code>aria-label</code></td><td>A11y</td><td>accessible name for icon buttons</td></tr>
+        <tr><td><code>aria-hidden</code></td><td>A11y</td><td>hide decorative nodes from AT</td></tr>
+        <tr><td><code>aria-expanded</code></td><td>A11y</td><td>disclosure state (pair with data-state)</td></tr>
+        <tr><td><code>aria-pressed</code></td><td>A11y</td><td>toggle-button state</td></tr>
+        <tr><td><code>aria-current</code></td><td>A11y</td><td>current page/step marker</td></tr>
+        <tr><td><code>role</code></td><td>A11y</td><td>explicit ARIA role override</td></tr>
+        <tr><td><code>tabindex</code></td><td>A11y</td><td>focus order override (0 = focusable)</td></tr>
+
+        <tr class="sg-group-row"><td colspan="3">Variable overrides (assigned on wrappers)</td></tr>
+        <tr><td><code>--_gap---size</code></td><td>Variable</td><td>overrides gap for u-gap-* utilities</td></tr>
+        <tr><td><code>--_column-count---value</code></td><td>Variable</td><td>overrides grid column count</td></tr>
+
+        </tbody>
+    </table>
+    </div>
+</section>
+
+<!-- ═══════════════════ SECTION 13 — PROJECT CUSTOM ═══════════════════ -->
+<section id="section-13" class="sg-section">
+    <h2 class="sg-h">13. Project custom classes</h2>
+    <p class="sg-desc">Classes defined in <code class="sg-code">src/css/project.css</code> — things LUMOS doesn't cover out of the box. Updates here as pages and components are built.</p>
+
+    <h3 class="sg-sub">When to create custom vs reuse LUMOS</h3>
+    <table class="sg-table">
+        <tr><th>Need</th><th>Use LUMOS</th><th>Create custom</th></tr>
+        <tr><td>Flex row with gap</td><td><code>u-flex-horizontal-nowrap</code> + <code>u-gap-inline-4</code></td><td>—</td></tr>
+        <tr><td>Two-studio schedule switcher</td><td>—</td><td><code>schedule_studio-switch</code></td></tr>
+        <tr><td>3-column grid</td><td><code>u-grid-autofit</code> or <code>u-grid-custom</code> + <code>u-column-4</code></td><td>—</td></tr>
+        <tr><td>Munich-specific pricing card</td><td>—</td><td><code>price_card_munich</code></td></tr>
+        <tr><td>Animated link underline</td><td>—</td><td><code>link_underline</code></td></tr>
+        <tr><td>Teacher portrait treatment</td><td><code>image-wrap--portrait-tall</code> covers most of it</td><td>—</td></tr>
+    </table>
+
+    <h3 class="sg-sub">Naming rules</h3>
+    <p class="sg-desc">Follow LUMOS <code class="sg-code">type_variation_element</code> with underscores. Never use utility-style names, camelCase, or hyphens within a level.</p>
+    <pre class="sg-code sg-code-block"><code>schedule_lehel_row        ← component: schedule, variation: lehel, element: row
+schedule_glockenbach_row  ← component: schedule, variation: glockenbach, element: row
+teacher_card_photo        ← component: teacher, variation: card, element: photo
+price_card_month          ← component: price, variation: card, element: month
+nav_studio-badge          ← component: nav, element: studio-badge
+footer_studio_address     ← component: footer, variation: studio, element: address</code></pre>
+
+    <h3 class="sg-sub">Custom classes in this project</h3>
+    <div class="sg-demo">
+        <p><em>None yet.</em> This section populates as <code class="sg-code">/components</code> and <code class="sg-code">/build-page</code> extend <code class="sg-code">project.css</code>. Expected early additions:</p>
+        <ul>
+            <li><code class="sg-code">schedule_studio-switch</code> — tab between Lehel and Glockenbach schedules</li>
+            <li><code class="sg-code">teacher_card_*</code> — teacher card layout for the <code class="sg-code">das-team</code> page</li>
+            <li><code class="sg-code">price_card_month</code>, <code class="sg-code">price_card_tenpack</code>, <code class="sg-code">price_card_dropin</code> — Munich's pricing tiers</li>
+            <li><code class="sg-code">studio_address_block</code> — address card shared between Lehel and Glockenbach pages</li>
+        </ul>
+    </div>
+
+    <h3 class="sg-sub">Custom variables</h3>
+    <p class="sg-desc">All variables are standard LUMOS. Munich-specific swatches live under existing token names so the rest of the framework works unchanged:</p>
+    <ul>
+        <li><code class="sg-code">--swatch--brand-500: #e68600</code> — saffron (Munich) replaces Düsseldorf's rust</li>
+        <li><code class="sg-code">--swatch--light-200: #f1eae0</code> — cream (Munich) replaces Düsseldorf's beige</li>
+        <li><code class="sg-code">--swatch--secondary-500: #7f99b5</code> — Munich slate blue</li>
+        <li><code class="sg-code">--swatch--tertiary-500: #0d3333</code> — deep teal (identical to Düsseldorf)</li>
+        <li><code class="sg-code">--swatch--dark-900: #191a1c</code> — Munich ink</li>
+    </ul>
+</section>
+
+        </main>
+    </div>
+</body>
+</html>
