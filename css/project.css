@@ -922,6 +922,11 @@
     }
 }
 
+/* Team page: teacher portraits in black & white (matches the original design) */
+.is-team-grid .feature_card_image_wrap img {
+    filter: grayscale(100%);
+}
+
 /* Temporarily hidden section (client "hide for now") — remove this class to restore */
 .u-hidden-temp {
     display: none;
